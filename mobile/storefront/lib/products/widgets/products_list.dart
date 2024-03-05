@@ -49,7 +49,7 @@ class _ProductsListState extends State<ProductsListView> {
           });
         });
       } else {
-        print('Failed to Load Products');
+        debugPrint('Failed to Load Products');
         throw Exception('Failed to Load Products');
       }
     } catch (e) {
