@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:storefront/auth/controller/controller.dart';
+import 'package:storefront/auth/view/signup_screen.dart';
 
 class SigninScreen extends StatelessWidget {
   const SigninScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var authController = Get.find<AuthController>();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromRGBO(15, 15, 15, 1.0),
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(253, 177, 216, 1.0),
         shape: RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.circular(25.0), // Add rounded corners to the app bar
+          borderRadius: BorderRadius.circular(25.0),
         ),
         leading: const Icon(
           Icons.login,
@@ -32,8 +36,8 @@ class SigninScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              //email address
               TextField(
+                controller: authController.emailController,
                 style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
@@ -43,9 +47,9 @@ class SigninScreen extends StatelessWidget {
                   hintStyle: const TextStyle(
                     color: Color.fromARGB(200, 255, 255, 255),
                   ),
-                  suffixIcon: const IconButton(
-                    onPressed: null,
-                    icon: Icon(Icons.clear, color: Colors.white),
+                  suffixIcon: IconButton(
+                    onPressed: () => authController.emailController.clear(),
+                    icon: const Icon(Icons.clear, color: Colors.white),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -67,15 +71,16 @@ class SigninScreen extends StatelessWidget {
               TextField(
                 style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
+                controller: authController.passwordController,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.lock, color: Colors.white),
                   hintText: 'Password',
                   hintStyle: const TextStyle(
                     color: Color.fromARGB(200, 255, 255, 255),
                   ),
-                  suffixIcon: const IconButton(
-                    onPressed: null,
-                    icon: Icon(Icons.clear, color: Colors.white),
+                  suffixIcon: IconButton(
+                    onPressed: () => authController.passwordController.clear(),
+                    icon: const Icon(Icons.clear, color: Colors.white),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -98,10 +103,10 @@ class SigninScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Action to perform on button press
+                    authController.signIn();
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: const Color.fromRGBO(253, 177, 216, 1.0),
+                    backgroundColor: const Color.fromRGBO(253, 177, 216, 1.0),
                   ),
                   child: const Padding(
                     padding: EdgeInsets.all(12),
@@ -116,20 +121,20 @@ class SigninScreen extends StatelessWidget {
                 ),
               ),
 
-              // forgot password
-              Center(
-                child: TextButton(
-                  onPressed: () {
-                    // Action to perform for forgot password
-                  },
-                  child: const Text(
-                    'Forgot Password',
-                    style: TextStyle(
-                      color: Colors.blue, // Set the text color to blue
-                    ),
-                  ),
-                ),
-              ),
+              // // forgot password
+              // Center(
+              //   child: TextButton(
+              //     onPressed: () {
+              //       // Action to perform for forgot password
+              //     },
+              //     child: const Text(
+              //       'Forgot Password',
+              //       style: TextStyle(
+              //         color: Colors.blue, // Set the text color to blue
+              //       ),
+              //     ),
+              //   ),
+              // ),
 
               // signup row
               Center(
@@ -144,7 +149,7 @@ class SigninScreen extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        // Action to perform for forgot password
+                        Get.offAll(() => const SignupScreen());
                       },
                       child: const Text(
                         'Sign up',

@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:storefront/auth/controller/controller.dart';
+import 'package:storefront/auth/view/signin_screen.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var authController = Get.find<AuthController>();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromRGBO(15, 15, 15, 1.0),
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(253, 177, 216, 1.0),
         shape: RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.circular(25.0), // Add rounded corners to the app bar
+          borderRadius: BorderRadius.circular(25.0),
         ),
         leading: const Icon(
           Icons.login,
@@ -63,9 +67,9 @@ class SignupScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-
               //email address
               TextField(
+                controller: authController.emailController,
                 style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
@@ -97,6 +101,7 @@ class SignupScreen extends StatelessWidget {
 
               //password
               TextField(
+                controller: authController.passwordController,
                 style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
@@ -130,10 +135,12 @@ class SignupScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Action to perform on button press
+                    authController.signUp();
+                    authController.emailController.clear();
+                    authController.passwordController.clear();
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: const Color.fromRGBO(253, 177, 216, 1.0),
+                    backgroundColor: const Color.fromRGBO(253, 177, 216, 1.0),
                   ),
                   child: const Padding(
                     padding: EdgeInsets.all(12),
@@ -149,7 +156,6 @@ class SignupScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-
               // signup row
               Center(
                 child: Row(
@@ -163,7 +169,7 @@ class SignupScreen extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        // Action to perform for forgot password
+                        Get.offAll(() => const SigninScreen());
                       },
                       child: const Text(
                         'Sign in',
