@@ -26,16 +26,15 @@ class _ProductsListState extends State<ProductsListView> {
     fetchData();
   }
 
-  Dio dio = Dio();
+  static Dio dio = Dio();
 
   Future<void> fetchData() async {
-    if (widget.brand.isNotEmpty) {
-      String url =
-          'https://makeup-api.herokuapp.com/api/v1/products.json?brand=${widget.brand}';
-      Response response = await dio.get(url);
+    try {
+      var response = await dio.get(
+          'http://makeup-api.herokuapp.com/api/v1/products.json?brand=${widget.brand}');
+
       if (response.statusCode == 200) {
         brandData = response.data;
-
         setState(() {
           productTypeFilters = brandData
               .map((product) => product['product_type'])
@@ -50,9 +49,22 @@ class _ProductsListState extends State<ProductsListView> {
           });
         });
       } else {
-        throw Exception('Failed to load data');
+        print('Failed to Load Products');
+        throw Exception('Failed to Load Products');
       }
+    } catch (e) {
+      throw Exception('Failed to load products');
     }
+  }
+
+  static List<dynamic> sortProductsByPrice(List<dynamic> products) {
+    products.sort((a, b) => a['price'].compareTo(b['price']));
+    return products;
+  }
+
+  static List<dynamic> sortProductsByRating(List<dynamic> products) {
+    products.sort((a, b) => b['rating'].compareTo(a['rating']));
+    return products;
   }
 
   typeFilterOptions() {
