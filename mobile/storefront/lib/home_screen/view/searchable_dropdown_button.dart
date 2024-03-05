@@ -1,8 +1,8 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:storefront/home/controller/dropdown_controller.dart';
-import 'package:storefront/home/model/brand_model.dart';
+import 'package:storefront/home_screen/controller/dropdown_controller.dart';
+import 'package:storefront/home_screen/model/brand_model.dart';
 
 class SearchableDropdownButton extends StatelessWidget {
   SearchableDropdownButton({super.key});

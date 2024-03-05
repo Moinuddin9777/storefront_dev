@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:storefront/home/view/searchable_dropdown_button.dart';
+import 'package:storefront/home_screen/view/searchable_dropdown_button.dart';
 //import 'package:storefront/home/controller/dropdown_controller.dart';
 
 class HomePage extends StatelessWidget {
