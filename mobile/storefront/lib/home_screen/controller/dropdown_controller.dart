@@ -10,7 +10,7 @@ class DropdownController extends GetxController {
 
   void handleSearchIconClick() {
     if (selectedValue != null && selectedValue!.isNotEmpty) {
-      String selectedBrand = selectedValue!;
+      // String selectedBrand = selectedValue!;
 
       // Clear the existing ProductController instance
       //Get.delete<ProductController>();

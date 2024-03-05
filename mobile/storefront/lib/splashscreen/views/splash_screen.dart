@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storefront/auth/controller/controller.dart';
 import 'package:storefront/auth/view/signin_screen.dart';
-import 'package:storefront/view/home.dart';
+import 'package:storefront/home_screen/home.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -33,7 +33,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //UI for SplashScreen
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
