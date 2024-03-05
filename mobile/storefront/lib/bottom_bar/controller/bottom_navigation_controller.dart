@@ -11,7 +11,10 @@ class NavigationController extends GetxController {
     const LogoutButton(),
   ];
 
-  void changeIndex(int index) => currentIndex = index;
+  void changeIndex(int index) {
+    currentIndex = index;
+    update();
+  }
 
   Widget currentScreen() => screens[currentIndex];
 }

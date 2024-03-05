@@ -13,7 +13,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   changeScreen() {
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 3), () {
       FirebaseAuth.instance.authStateChanges().listen((User? user) {
         if (user == null && mounted) {
           Get.offAll(() => const SigninScreen());
