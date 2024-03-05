@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "271622300760",
+    "project_id": "storefront-b0d60",
+    "storage_bucket": "storefront-b0d60.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271622300760:android:e880aa760ecece2de4562d",
+        "android_client_info": {
+          "package_name": "com.example.storefront"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnllKrTiJkyvzJ3jobmrijl07aTRDa6HA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
