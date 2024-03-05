@@ -3,12 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
-  Future<void> signIn({required String email, required String password}) async {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  Future<void> signIn() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      )
+          .then((value) {
+        emailController.clear();
+        passwordController.clear();
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         debugPrint(
@@ -22,12 +29,17 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> signUp({required String email, required String password}) async {
+  Future<void> signUp() async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      )
+          .then((value) {
+        emailController.clear();
+        passwordController.clear();
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         debugPrint(
