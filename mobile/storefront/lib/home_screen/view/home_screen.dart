@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:storefront/products/view/products_page.dart';
 // import 'package:storefront/home_screen/view/searchable_dropdown_button.dart';
 import 'package:storefront/products/view/products_page.dart';
-//import 'package:storefront/home/controller/dropdown_controller.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
