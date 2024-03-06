@@ -97,46 +97,6 @@ class HomePage extends StatelessWidget {
             },
             child: const Text('Go to Products page'),
           ),
-          // Dropdown button
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    // child: SearchableDropdownButton(),
-                  ),
-                ),
-                //search icon
-                Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      //dropdownController.handleSearchIconClick();
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadiusDirectional.circular(25),
-                        border: Border.all(
-                          width: 1.0,
-                        ),
-                      ),
-                      child: IconButton(
-                        onPressed: () {
-                          Get.to(const ProductsPage());
-                        },
-                        icon: Icon(
-                          Icons.search,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
         ],
       ),
     );
