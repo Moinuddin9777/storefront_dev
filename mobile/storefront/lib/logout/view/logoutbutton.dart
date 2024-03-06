@@ -8,14 +8,26 @@ class LogoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: IconButton(
-          onPressed: () {
-            Get.find<AuthController>().signOut();
-          },
-          icon: const Icon(Icons.logout),
-        ),
+    return Center(
+      child: Column(
+        children: [
+          IconButton(
+            onPressed: () {
+              Get.find<AuthController>().signOut();
+            },
+            icon: const Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
+          ),
+          const Text(
+            "Sign out",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+            ),
+          ),
+        ],
       ),
     );
   }
