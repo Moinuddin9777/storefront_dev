@@ -38,6 +38,7 @@ class SignupScreen extends StatelessWidget {
             children: [
               // name
               TextField(
+                controller: authController.nameController,
                 style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
@@ -47,9 +48,9 @@ class SignupScreen extends StatelessWidget {
                   hintStyle: const TextStyle(
                     color: Color.fromARGB(200, 255, 255, 255),
                   ),
-                  suffixIcon: const IconButton(
-                    onPressed: null,
-                    icon: Icon(Icons.clear, color: Colors.white),
+                  suffixIcon: IconButton(
+                    onPressed: () => authController.nameController.clear(),
+                    icon: const Icon(Icons.clear, color: Colors.white),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -79,9 +80,9 @@ class SignupScreen extends StatelessWidget {
                   hintStyle: const TextStyle(
                     color: Color.fromARGB(200, 255, 255, 255),
                   ),
-                  suffixIcon: const IconButton(
-                    onPressed: null,
-                    icon: Icon(Icons.clear, color: Colors.white),
+                  suffixIcon: IconButton(
+                    onPressed: () => authController.emailController.clear(),
+                    icon: const Icon(Icons.clear, color: Colors.white),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -110,9 +111,9 @@ class SignupScreen extends StatelessWidget {
                   hintStyle: const TextStyle(
                     color: Color.fromARGB(200, 255, 255, 255),
                   ),
-                  suffixIcon: const IconButton(
-                    onPressed: null,
-                    icon: Icon(Icons.clear, color: Colors.white),
+                  suffixIcon: IconButton(
+                    onPressed: () => authController.passwordController.clear(),
+                    icon: const Icon(Icons.clear, color: Colors.white),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -170,6 +171,7 @@ class SignupScreen extends StatelessWidget {
                     TextButton(
                       onPressed: () {
                         Get.offAll(() => const SigninScreen());
+                        authController.clearControllers();
                       },
                       child: const Text(
                         'Sign in',

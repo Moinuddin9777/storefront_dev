@@ -150,6 +150,7 @@ class SigninScreen extends StatelessWidget {
                     TextButton(
                       onPressed: () {
                         Get.offAll(() => const SignupScreen());
+                        authController.clearControllers();
                       },
                       child: const Text(
                         'Sign up',

@@ -16,22 +16,25 @@ class LogoutButton extends StatelessWidget {
           if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           }
-      
+
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
           }
-      
+
           final user = snapshot.data;
           if (user == null) {
-            // User is signed out, go to SigninScreen
-            return const SigninScreen();
+            return Center(
+              child: TextButton(
+                  onPressed: () {
+                    Get.offAll(() => const SigninScreen());
+                  },
+                  child: const Text("Login")),
+            );
           } else {
-            // User is still signed in, show LogoutButton
             return Center(
               child: IconButton(
                 onPressed: () {
                   Get.find<AuthController>().signOut();
-                  // Get.offAll(() => const SigninScreen());
                 },
                 icon: const Icon(
                   Icons.exit_to_app,
