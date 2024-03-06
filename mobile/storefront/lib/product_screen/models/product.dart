@@ -8,7 +8,7 @@ Product productFromJson(String str) => Product.fromJson(json.decode(str));
 
 String productToJson(Product data) => json.encode(data.toJson());
 
-class Product {
+class Product implements Comparable<Product> {
   int id;
   String? brand;
   String name;
@@ -96,6 +96,11 @@ class Product {
         "product_colors":
             List<dynamic>.from(productColors.map((x) => x.toJson())),
       };
+
+  @override
+  int compareTo(Product other) {
+    return double.parse(price!).compareTo(double.parse(other.price!));
+  }
 }
 
 class ProductColor {

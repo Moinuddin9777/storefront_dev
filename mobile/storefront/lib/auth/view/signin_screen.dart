@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:storefront/auth/controller/controller.dart';
+import 'package:storefront/auth/controller/auth_controller.dart';
 import 'package:storefront/auth/view/signup_screen.dart';
 
 class SigninScreen extends StatelessWidget {
@@ -100,26 +100,36 @@ class SigninScreen extends StatelessWidget {
               const SizedBox(height: 20),
 
               // login button
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    authController.signIn();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(253, 177, 216, 1.0),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(12),
-                    child: Text(
-                      'Sign in',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 25,
+              GetBuilder(
+                init: AuthController(),
+                builder: (controller) {
+                  return SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        authController.signIn();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            const Color.fromRGBO(253, 177, 216, 1.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: controller.isLoading
+                            ? const CircularProgressIndicator(
+                                color: Colors.black,
+                              )
+                            : const Text(
+                                'Sign in',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 25,
+                                ),
+                              ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
 
               // // forgot password

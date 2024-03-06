@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:storefront/home_screen/view/searchable_dropdown_button.dart';
-import 'package:storefront/products/view/products_page.dart';
-//import 'package:storefront/home/controller/dropdown_controller.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -61,13 +57,13 @@ class HomePage extends StatelessWidget {
                 style: TextStyle(fontSize: 35),
                 children: [
                   TextSpan(
-                    text: 'Select your ',
+                    text: 'All your ',
                     style: TextStyle(
                       color: Color.fromARGB(255, 255, 255, 255),
                     ),
                   ),
                   TextSpan(
-                    text: 'Favorite Brand',
+                    text: 'Favorite Brands',
                     style: TextStyle(
                       color: Color.fromRGBO(218, 136, 182, 1.0),
                       fontWeight: FontWeight.bold,
@@ -81,49 +77,6 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-          ),
-
-          // Dropdown button
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: SearchableDropdownButton(),
-                  ),
-                ),
-                //search icon
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      //dropdownController.handleSearchIconClick();
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadiusDirectional.circular(25),
-                        color: const Color.fromRGBO(50, 50, 50, 1.0),
-                        border: Border.all(
-                          color: const Color.fromARGB(255, 0, 0, 0),
-                          width: 1.0,
-                        ),
-                      ),
-                      child: IconButton(
-                        onPressed: () {
-                          Get.to(const ProductsPage());
-                        },
-                        icon: const Icon(
-                          Icons.search,
-                          color: Color.fromARGB(255, 255, 255, 255),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
             ),
           ),
         ],

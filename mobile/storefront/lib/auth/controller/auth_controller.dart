@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storefront/auth/services/toast_service.dart';
 import 'package:storefront/auth/view/signin_screen.dart';
-import 'package:storefront/bottom_bar/view/home.dart';
+import 'package:storefront/bottom_bar/view/bottom_bar.dart';
 
 class AuthController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
+  bool isLoading = false;
 
   Future<void> signIn() async {
+    isLoading = true;
+    update();
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(
@@ -22,22 +24,18 @@ class AuthController extends GetxController {
         clearControllers();
       });
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        debugPrint('No user found for that email.');
-        ToastService.showToast(message: 'No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        debugPrint('Incorrect password provided for that user.');
-        ToastService.showToast(
-            message: 'Incorrect password provided for that user.');
-      } else {
-        ToastService.showToast(message: e.code.toString());
-      }
+      ToastService.showToast(message: e.code.toString());
+      clearControllers();
     } catch (e) {
       debugPrint(e.toString());
     }
+    isLoading = false;
+    update();
   }
 
   Future<void> signUp() async {
+    isLoading = true;
+    update();
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
@@ -49,18 +47,13 @@ class AuthController extends GetxController {
         clearControllers();
       });
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        debugPrint('The password is too weak.');
-        ToastService.showToast(message: 'The password is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        debugPrint('The account already exists for that email.');
-        ToastService.showToast(message: 'email-already-in-use');
-      } else {
-        ToastService.showToast(message: e.code.toString());
-      }
+      ToastService.showToast(message: e.code.toString());
+      clearControllers();
     } catch (e) {
       debugPrint(e.toString());
     }
+    isLoading = false;
+    update();
   }
 
   Future<void> signOut() async {
@@ -76,6 +69,5 @@ class AuthController extends GetxController {
   void clearControllers() {
     emailController.clear();
     passwordController.clear();
-    nameController.clear();
   }
 }
