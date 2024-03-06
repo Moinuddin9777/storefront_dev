@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:storefront/home_screen/controller/dropdown_controller.dart';
 import 'package:storefront/home_screen/view/searchable_dropdown_button.dart';
+import 'package:storefront/products/view/products_list_screen.dart';
 //import 'package:storefront/home/controller/dropdown_controller.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
+    DropdownController dropdownController = Get.put(DropdownController());
     return Scaffold(
       backgroundColor: const Color.fromRGBO(15, 15, 15, 1.0),
       appBar: AppBar(
@@ -109,9 +113,13 @@ class HomePage extends StatelessWidget {
                           width: 1.0,
                         ),
                       ),
-                      child: const IconButton(
-                        onPressed: null,
-                        icon: Icon(
+                      child: IconButton(
+                        onPressed: () {
+                          ProductsList(
+                              brand:
+                                  dropdownController.selectedValue.toString());
+                        },
+                        icon: const Icon(
                           Icons.search,
                           color: Color.fromARGB(255, 255, 255, 255),
                         ),
