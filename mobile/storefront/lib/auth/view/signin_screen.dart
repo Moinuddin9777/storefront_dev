@@ -9,25 +9,24 @@ class SigninScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var authController = Get.find<AuthController>();
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: const Color.fromRGBO(15, 15, 15, 1.0),
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(253, 177, 216, 1.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25.0),
         ),
-        leading: const Icon(
+        leading: Icon(
           Icons.login,
-          color: Color.fromARGB(255, 0, 0, 0),
+          color: Theme.of(context).colorScheme.onPrimary,
         ),
         centerTitle: true,
-        title: const Text(
+        title: Text(
           'Sign-in',
-          style: TextStyle(
-            color: Color.fromARGB(255, 0, 0, 0),
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(color: Theme.of(context).colorScheme.onPrimary),
         ),
       ),
       body: Padding(
@@ -38,29 +37,21 @@ class SigninScreen extends StatelessWidget {
             children: [
               TextField(
                 controller: authController.emailController,
-                style: const TextStyle(color: Colors.white),
-                cursorColor: Colors.white,
                 decoration: InputDecoration(
-                  prefixIcon:
-                      const Icon(Icons.email_outlined, color: Colors.white),
-                  hintText: 'email address',
-                  hintStyle: const TextStyle(
-                    color: Color.fromARGB(200, 255, 255, 255),
-                  ),
+                  prefixIcon: const Icon(Icons.email_outlined),
+                  hintText: 'Email address',
                   suffixIcon: IconButton(
                     onPressed: () => authController.emailController.clear(),
-                    icon: const Icon(Icons.clear, color: Colors.white),
+                    icon: const Icon(Icons.clear),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                    ),
+                    borderSide: const BorderSide(),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Color.fromARGB(200, 255, 255, 255),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ),
@@ -69,35 +60,40 @@ class SigninScreen extends StatelessWidget {
 
               //password
               TextField(
-                style: const TextStyle(color: Colors.white),
-                cursorColor: Colors.white,
                 controller: authController.passwordController,
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.lock, color: Colors.white),
-                  hintText: 'Password',
-                  hintStyle: const TextStyle(
-                    color: Color.fromARGB(200, 255, 255, 255),
+                  prefixIcon: const Icon(
+                    Icons.lock,
                   ),
+                  hintText: 'Password',
                   suffixIcon: IconButton(
                     onPressed: () => authController.passwordController.clear(),
-                    icon: const Icon(Icons.clear, color: Colors.white),
+                    icon: const Icon(
+                      Icons.clear,
+                    ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                    ),
+                    borderSide: const BorderSide(),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Color.fromARGB(200, 255, 255, 255),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 5.0),
 
+              Text(
+                authController.error1,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodySmall!
+                    .copyWith(color: Colors.red),
+              ),
+              const SizedBox(height: 20),
               // login button
               SizedBox(
                 width: double.infinity,
@@ -105,47 +101,24 @@ class SigninScreen extends StatelessWidget {
                   onPressed: () {
                     authController.signIn();
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(253, 177, 216, 1.0),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(12),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
                     child: Text(
                       'Sign in',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 25,
-                      ),
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary),
                     ),
                   ),
                 ),
               ),
-
-              // // forgot password
-              // Center(
-              //   child: TextButton(
-              //     onPressed: () {
-              //       // Action to perform for forgot password
-              //     },
-              //     child: const Text(
-              //       'Forgot Password',
-              //       style: TextStyle(
-              //         color: Colors.blue, // Set the text color to blue
-              //       ),
-              //     ),
-              //   ),
-              // ),
-
-              // signup row
+              const SizedBox(height: 20),
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       'Don\'t have an account ?',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
+                      style: Theme.of(context).textTheme.bodySmall!,
                     ),
                     TextButton(
                       onPressed: () {
@@ -153,9 +126,6 @@ class SigninScreen extends StatelessWidget {
                       },
                       child: const Text(
                         'Sign up',
-                        style: TextStyle(
-                          color: Colors.blue, // Set the text color to blue
-                        ),
                       ),
                     ),
                   ],

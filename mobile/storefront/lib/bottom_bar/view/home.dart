@@ -18,8 +18,11 @@ class Home extends StatelessWidget {
       bottomNavigationBar: GetBuilder<NavigationController>(
         init: NavigationController(),
         builder: (controller) => Container(
-          decoration: const BoxDecoration(
-            color: Color.fromRGBO(253, 177, 216, 1.0),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              Theme.of(context).colorScheme.primaryContainer.withOpacity(0.4),
+              Theme.of(context).colorScheme.primary.withOpacity(0.6)
+            ]),
           ),
           child: BottomNavigationBar(
             currentIndex: controller.currentIndex,
@@ -28,15 +31,19 @@ class Home extends StatelessWidget {
             },
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home, color: Colors.black),
+                icon: Icon(
+                  Icons.home,
+                ),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person, color: Colors.black),
+                icon: Icon(
+                  Icons.person,
+                ),
                 label: 'Profile',
               ),
             ],
-            backgroundColor: Colors.transparent,
+            backgroundColor: Theme.of(context).colorScheme.primary,
             selectedItemColor: Colors.white,
             unselectedItemColor: Colors.black,
           ),
@@ -45,4 +52,3 @@ class Home extends StatelessWidget {
     );
   }
 }
-

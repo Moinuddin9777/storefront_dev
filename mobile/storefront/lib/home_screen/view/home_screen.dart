@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:storefront/home_screen/view/searchable_dropdown_button.dart';
+import 'package:storefront/products/view/products_list_screen.dart';
 //import 'package:storefront/home/controller/dropdown_controller.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(15, 15, 15, 1.0),
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(253, 177, 216, 1.0),
         shape: RoundedRectangleBorder(
           borderRadius:
               BorderRadius.circular(25.0), // Add rounded corners to the app bar
         ),
-        leading: const Icon(
+        leading: Icon(
           Icons.home,
-          color: Color.fromARGB(255, 0, 0, 0),
+          color: Theme.of(context).colorScheme.onPrimary,
         ),
         centerTitle: true,
-        title: const Text(
+        title: Text(
           'Home Page',
-          style: TextStyle(
-            color: Color.fromARGB(255, 0, 0, 0),
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(color: Theme.of(context).colorScheme.onPrimary),
         ),
       ),
       body: Column(
@@ -37,7 +37,13 @@ class HomePage extends StatelessWidget {
               child: Container(
                 width: 400,
                 decoration: BoxDecoration(
-                  color: const Color.fromRGBO(253, 177, 216, 1.0),
+                  gradient: LinearGradient(colors: [
+                    Theme.of(context)
+                        .colorScheme
+                        .primaryContainer
+                        .withOpacity(0.4),
+                    Theme.of(context).colorScheme.primary.withOpacity(0.6)
+                  ]),
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: ClipRRect(
@@ -55,27 +61,29 @@ class HomePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(10),
             child: RichText(
-              text: const TextSpan(
-                style: TextStyle(fontSize: 35),
+              text: TextSpan(
+                style: const TextStyle(fontSize: 35),
                 children: [
                   TextSpan(
                     text: 'Select your ',
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                    ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(color: Theme.of(context).colorScheme.primary),
                   ),
                   TextSpan(
                     text: 'Favorite Brand',
-                    style: TextStyle(
-                      color: Color.fromRGBO(218, 136, 182, 1.0),
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(color: Theme.of(context).colorScheme.primary),
                   ),
                   TextSpan(
                     text: ' here !!',
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                    ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(color: Theme.of(context).colorScheme.primary),
                   ),
                 ],
               ),
@@ -95,7 +103,7 @@ class HomePage extends StatelessWidget {
                 ),
                 //search icon
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(6.0),
                   child: GestureDetector(
                     onTap: () {
                       //dropdownController.handleSearchIconClick();
@@ -103,17 +111,17 @@ class HomePage extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadiusDirectional.circular(25),
-                        color: const Color.fromRGBO(50, 50, 50, 1.0),
                         border: Border.all(
-                          color: const Color.fromARGB(255, 0, 0, 0),
                           width: 1.0,
                         ),
                       ),
-                      child: const IconButton(
-                        onPressed: null,
+                      child: IconButton(
+                        onPressed: () {
+                          Get.to(const ProductsList());
+                        },
                         icon: Icon(
                           Icons.search,
-                          color: Color.fromARGB(255, 255, 255, 255),
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                     ),

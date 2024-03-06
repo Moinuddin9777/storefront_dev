@@ -17,22 +17,20 @@ class SearchableDropdownButton extends StatelessWidget {
       builder: (controller) => DropdownButtonHideUnderline(
         child: DropdownButton2<String>(
           isExpanded: true,
-          hint: const Text(
+          hint: Text(
             'Select Brand',
-            style: TextStyle(
-              fontSize: 14,
-              color: Color.fromARGB(163, 255, 255, 255),
-            ),
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge!
+                .copyWith(color: Theme.of(context).colorScheme.onPrimary),
           ),
           items: brandModel.brands
               .map((item) => DropdownMenuItem(
                     value: item,
                     child: Text(
                       item,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.white,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary),
                     ),
                   ))
               .toList(),
@@ -46,10 +44,10 @@ class SearchableDropdownButton extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   item,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.white,
-                  ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge!
+                      .copyWith(color: Theme.of(context).colorScheme.onPrimary),
                 ),
               );
             }).toList();
@@ -60,9 +58,9 @@ class SearchableDropdownButton extends StatelessWidget {
             padding: const EdgeInsets.only(left: 14, right: 14),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
-              color: const Color.fromRGBO(50, 50, 50, 1.0),
+              color: Theme.of(context).colorScheme.primary,
               border: Border.all(
-                color: const Color.fromRGBO(0, 0, 0, 1),
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
             elevation: 5,
@@ -71,7 +69,7 @@ class SearchableDropdownButton extends StatelessWidget {
             maxHeight: 200,
             width: 350,
             decoration: BoxDecoration(
-              color: const Color.fromRGBO(26, 26, 26, 1.0),
+              color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(20),
             ),
             padding: const EdgeInsets.all(10),
@@ -94,7 +92,10 @@ class SearchableDropdownButton extends StatelessWidget {
                 expands: true,
                 maxLines: null,
                 controller: textEditingController,
-                style: const TextStyle(color: Colors.white),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(color: Theme.of(context).colorScheme.onPrimary),
                 decoration: InputDecoration(
                   isDense: true,
                   contentPadding: const EdgeInsets.symmetric(
@@ -102,9 +103,18 @@ class SearchableDropdownButton extends StatelessWidget {
                     vertical: 8,
                   ),
                   hintText: 'Search for brand',
-                  hintStyle: const TextStyle(fontSize: 12,color: Color.fromARGB(166, 255, 255, 255)),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
+                  hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
               ),
