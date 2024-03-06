@@ -115,9 +115,9 @@ class HomePage extends StatelessWidget {
                       ),
                       child: IconButton(
                         onPressed: () {
-                          ProductsList(
+                          Get.to(ProductsList(
                               brand:
-                                  dropdownController.selectedValue.toString());
+                                  dropdownController.selectedValue.toString()));
                         },
                         icon: const Icon(
                           Icons.search,
