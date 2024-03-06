@@ -8,8 +8,8 @@ class NavigationController extends GetxController {
 
   final screens = [
     const HomePage(),
-    // productScreen(),
     const LogoutButton(),
+    // productScreen(),
   ];
 
   void changeIndex(int index) {
