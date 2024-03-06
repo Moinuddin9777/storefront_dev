@@ -20,6 +20,9 @@ class ProductController extends GetxController {
   }
 
   void loadProducts() async {
+    isLoading = true;
+    update();
+    products.clear();
     String url = 'http://makeup-api.herokuapp.com/api/v1/products.json';
     try {
       final response = await Dio().get(url);
@@ -42,6 +45,9 @@ class ProductController extends GetxController {
   }
 
   void loadProductsfromBrand(String brand) async {
+    isLoading = true;
+    update();
+    products.clear();
     String url =
         'http://makeup-api.herokuapp.com/api/v1/products.json?brand=$brand';
     try {
@@ -66,6 +72,9 @@ class ProductController extends GetxController {
   }
 
   void loadProductsfromCategory(String type) async {
+    isLoading = true;
+    update();
+    products.clear();
     String url =
         'http://makeup-api.herokuapp.com/api/v1/products.json?product_type=$type';
     try {
