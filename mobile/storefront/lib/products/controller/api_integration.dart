@@ -20,9 +20,30 @@ class ProductController extends GetxController {
   }
 
   void loadProducts() async {
+    String url = 'http://makeup-api.herokuapp.com/api/v1/products.json';
+    try {
+      final response = await Dio().get(url);
+      if (response.statusCode == 200) {
+        final decodedData = json.decode(response.toString());
+        for (var item in decodedData) {
+          if (await checkImageUrlStatus(item['image_link'])) {
+            products.add(Product.fromJson(item));
+            update();
+          }
+        }
+        isLoading = false;
+        update();
+      } else {
+        debugPrint('Error: ${response.statusCode}');
+      }
+    } catch (e) {
+      debugPrint('Error: $e');
+    }
+  }
+
+  void loadProductsfromBrand(String brand) async {
     String url =
         'http://makeup-api.herokuapp.com/api/v1/products.json?brand=$brand';
-    debugPrint('get started');
     try {
       final response = await Dio().get(url);
       if (response.statusCode == 200) {
@@ -44,6 +65,29 @@ class ProductController extends GetxController {
     }
   }
 
+  void loadProductsfromCategory(String type) async {
+    String url =
+        'http://makeup-api.herokuapp.com/api/v1/products.json?product_type=$type';
+    try {
+      final response = await Dio().get(url);
+      if (response.statusCode == 200) {
+        final decodedData = json.decode(response.toString());
+        for (var item in decodedData) {
+          if (await checkImageUrlStatus(item['image_link'])) {
+            products.add(Product.fromJson(item));
+            update();
+          }
+        }
+        isLoading = false;
+        update();
+      } else {
+        debugPrint('Error: ${response.statusCode}');
+      }
+    } catch (e) {
+      debugPrint('Error: $e');
+    }
+  }
+
   Future<bool> checkImageUrlStatus(String url) async {
     try {
       final response = await Dio().head(url);
@@ -51,5 +95,15 @@ class ProductController extends GetxController {
     } catch (e) {
       return false;
     }
+  }
+
+  static List<dynamic> sortProductsByPrice(List<dynamic> products) {
+    products.sort((a, b) => a['price'].compareTo(b['price']));
+    return products;
+  }
+
+  static List<dynamic> sortProductsByRating(List<dynamic> products) {
+    products.sort((a, b) => b['rating'].compareTo(a['rating']));
+    return products;
   }
 }
