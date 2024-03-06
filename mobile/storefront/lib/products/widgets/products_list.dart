@@ -120,11 +120,7 @@ class _ProductsListState extends State<ProductsListView> {
                           }
                         });
                       },
-                    )
-                    // child: Icon(isCheckedFilterType[index]
-                    //     ? Icons.check_box_rounded
-                    //     : Icons.check_box_outline_blank_rounded),
-                    )
+                    ))
               ],
             ),
           );
@@ -188,22 +184,10 @@ class _ProductsListState extends State<ProductsListView> {
               },
               child: const Text('Filters')),
         ]),
-        body:
-            // ModalProgressHUD(
-            //     inAsyncCall: isLoading,
-            //     progressIndicator: const CircularProgressIndicator(),
-            //     child:
-            productsView()
-        //  ),
-        );
+        body: productsView());
   }
 
   GridView productsView() {
-    // Color getColorForIndex(int index) {
-    //   return Color.fromARGB(255 + index * 40, 92 + index * 30, 144 + index * 40,
-    //       233 + index * 20);
-    // }
-
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -214,7 +198,6 @@ class _ProductsListState extends State<ProductsListView> {
       itemBuilder: (context, index) {
         return GridTile(
           child: Card(
-            // color: getColorForIndex(index),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             child: InkWell(
@@ -245,13 +228,13 @@ class _ProductsListState extends State<ProductsListView> {
                       Text(
                         'Rating: ${typeFilteredList[index]['rating']}',
                         style: const TextStyle(
-                          fontSize: 11.5,
+                          fontSize: 11,
                         ),
                       ),
                       Text(
                         'Price \$${typeFilteredList[index]['price']}',
                         style: const TextStyle(
-                          fontSize: 11.5,
+                          fontSize: 11,
                         ),
                       ),
                     ],

@@ -8,15 +8,15 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<NavigationController>(
-        init: NavigationController(),
+      body: GetBuilder<BottomBarController>(
+        init: BottomBarController(),
         builder: (controller) => IndexedStack(
           index: controller.currentIndex,
           children: controller.screens,
         ),
       ),
-      bottomNavigationBar: GetBuilder<NavigationController>(
-        init: NavigationController(),
+      bottomNavigationBar: GetBuilder<BottomBarController>(
+        init: BottomBarController(),
         builder: (controller) => Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
@@ -36,11 +36,16 @@ class Home extends StatelessWidget {
                 ),
                 label: 'Home',
               ),
+              
               BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person,
                 ),
                 label: 'Profile',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.category, color: Colors.black),
+                label: 'products',
               ),
             ],
             backgroundColor: Theme.of(context).colorScheme.primary,

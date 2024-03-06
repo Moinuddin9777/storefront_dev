@@ -60,6 +60,12 @@ class SigninScreen extends StatelessWidget {
 
               //password
               TextField(
+<<<<<<< HEAD
+=======
+                obscureText: true,
+                style: const TextStyle(color: Colors.white),
+                cursorColor: Colors.white,
+>>>>>>> 02cda3d4b178def79735c2c8d606ab274afe1d5f
                 controller: authController.passwordController,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(
@@ -123,6 +129,7 @@ class SigninScreen extends StatelessWidget {
                     TextButton(
                       onPressed: () {
                         Get.offAll(() => const SignupScreen());
+                        authController.clearControllers();
                       },
                       child: const Text(
                         'Sign up',

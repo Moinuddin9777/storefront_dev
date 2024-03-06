@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,6 +8,12 @@ import 'package:storefront/auth/controller/controller.dart';
 import 'package:storefront/auth/view/signin_screen.dart';
 import 'package:storefront/home_screen/view/home_screen.dart';
 import 'package:storefront/logout/view/image_controller.dart';
+=======
+// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:storefront/auth/controller/controller.dart';
+>>>>>>> 02cda3d4b178def79735c2c8d606ab274afe1d5f
 
 class LogoutButton extends StatelessWidget {
   const LogoutButton({super.key});
@@ -16,6 +23,7 @@ class LogoutButton extends StatelessWidget {
     final ImageController controller = Get.put(ImageController());
     String name = Get.find<AuthController>().emailController.text;
     return Scaffold(
+<<<<<<< HEAD
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
@@ -32,6 +40,14 @@ class LogoutButton extends StatelessWidget {
               .textTheme
               .titleLarge!
               .copyWith(color: Theme.of(context).colorScheme.onPrimary),
+=======
+      body: Center(
+        child: IconButton(
+          onPressed: () {
+            Get.find<AuthController>().signOut();
+          },
+          icon: const Icon(Icons.logout),
+>>>>>>> 02cda3d4b178def79735c2c8d606ab274afe1d5f
         ),
       ),
       body: StreamBuilder<User?>(
