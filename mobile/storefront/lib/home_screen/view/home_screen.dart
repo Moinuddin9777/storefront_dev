@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storefront/home_screen/view/searchable_dropdown_button.dart';
-<<<<<<< HEAD
-import 'package:storefront/products/view/products_list_screen.dart';
-=======
 import 'package:storefront/products/view/products_page.dart';
->>>>>>> 02cda3d4b178def79735c2c8d606ab274afe1d5f
 //import 'package:storefront/home/controller/dropdown_controller.dart';
 
 class HomePage extends StatelessWidget {
@@ -121,15 +117,9 @@ class HomePage extends StatelessWidget {
                       ),
                       child: IconButton(
                         onPressed: () {
-<<<<<<< HEAD
-                          Get.to(const ProductsList());
-                        },
-                        icon: Icon(
-=======
                           Get.to(const ProductsPage());
                         },
-                        icon: const Icon(
->>>>>>> 02cda3d4b178def79735c2c8d606ab274afe1d5f
+                        icon: Icon(
                           Icons.search,
                           color: Theme.of(context).colorScheme.primary,
                         ),

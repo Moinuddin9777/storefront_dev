@@ -1,24 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-<<<<<<< HEAD
-import 'package:fluttertoast/fluttertoast.dart';
-=======
 import 'package:storefront/auth/services/toast_service.dart';
 import 'package:storefront/auth/view/signin_screen.dart';
 import 'package:storefront/bottom_bar/view/home.dart';
->>>>>>> 02cda3d4b178def79735c2c8d606ab274afe1d5f
 
 class AuthController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
-<<<<<<< HEAD
-  String error1 = '';
-  String errors = '';
-=======
-
->>>>>>> 02cda3d4b178def79735c2c8d606ab274afe1d5f
   Future<void> signIn() async {
     try {
       await FirebaseAuth.instance
@@ -33,27 +23,6 @@ class AuthController extends GetxController {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         debugPrint('No user found for that email.');
-<<<<<<< HEAD
-        Fluttertoast.showToast(
-            msg: 'No user found for that email.',
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0); //Create UI(toast/snackbar) for notifying the user
-      } else if (e.code == 'wrong-password') {
-        debugPrint('Incorrect password provided for that user.');
-        Fluttertoast.showToast(
-            msg: 'Incorrect password provided for that user.',
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
-        //Create UI(toast/snackbar) for notifying the user
-=======
         ToastService.showToast(message: 'No user found for that email.');
       } else if (e.code == 'wrong-password') {
         debugPrint('Incorrect password provided for that user.');
@@ -61,20 +30,12 @@ class AuthController extends GetxController {
             message: 'Incorrect password provided for that user.');
       } else {
         ToastService.showToast(message: e.code.toString());
->>>>>>> 02cda3d4b178def79735c2c8d606ab274afe1d5f
       }
     }
   }
 
   Future<void> signUp() async {
     try {
-      if (emailController.text.isEmpty ||
-          emailController.text.length < 10 ||
-          passwordController.text.length < 6 ||
-          nameController.text.isEmpty) {
-        errors = 'Invalid email and password and name';
-        print(errors);
-      }
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
         email: emailController.text,
