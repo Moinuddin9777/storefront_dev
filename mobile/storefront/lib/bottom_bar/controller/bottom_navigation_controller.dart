@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:get/get.dart";
 import "package:storefront/home_screen/view/home_screen.dart";
+import "package:storefront/products/view/products_page.dart";
 import "package:storefront/profile/profile_screen.dart";
 
 class BottomBarController extends GetxController {
@@ -9,7 +10,7 @@ class BottomBarController extends GetxController {
   final screens = [
     const HomePage(),
     const ProfileScreen(),
-    // productScreen(),
+    const ProductsPage(),
   ];
 
   void changeIndex(int index) {
