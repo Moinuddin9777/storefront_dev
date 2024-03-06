@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:storefront/home_screen/view/searchable_dropdown_button.dart';
-<<<<<<< HEAD
-import 'package:storefront/products/view/products_list_screen.dart';
-=======
 import 'package:storefront/products/view/products_page.dart';
->>>>>>> 02cda3d4b178def79735c2c8d606ab274afe1d5f
-//import 'package:storefront/home/controller/dropdown_controller.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -76,7 +70,7 @@ class HomePage extends StatelessWidget {
                         .copyWith(color: Theme.of(context).colorScheme.primary),
                   ),
                   TextSpan(
-                    text: 'Favorite Brand',
+                    text: 'Favorite Brands',
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge!
@@ -94,52 +88,11 @@ class HomePage extends StatelessWidget {
             ),
           ),
 
-          // Dropdown button
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: SearchableDropdownButton(),
-                  ),
-                ),
-                //search icon
-                Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      //dropdownController.handleSearchIconClick();
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadiusDirectional.circular(25),
-                        border: Border.all(
-                          width: 1.0,
-                        ),
-                      ),
-                      child: IconButton(
-                        onPressed: () {
-<<<<<<< HEAD
-                          Get.to(const ProductsList());
-                        },
-                        icon: Icon(
-=======
-                          Get.to(const ProductsPage());
-                        },
-                        icon: const Icon(
->>>>>>> 02cda3d4b178def79735c2c8d606ab274afe1d5f
-                          Icons.search,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
+          // go to products
+          ElevatedButton(
+              onPressed: () {
+              Get.to(() => ProductsPage());
+            }, child: const Text('Go to Products page'),),
         ],
       ),
     );
