@@ -228,13 +228,13 @@ class _ProductsListState extends State<ProductsListView> {
                       Text(
                         'Rating: ${typeFilteredList[index]['rating']}',
                         style: const TextStyle(
-                          fontSize: 11.5,
+                          fontSize: 11,
                         ),
                       ),
                       Text(
                         'Price \$${typeFilteredList[index]['price']}',
                         style: const TextStyle(
-                          fontSize: 11.5,
+                          fontSize: 11,
                         ),
                       ),
                     ],
