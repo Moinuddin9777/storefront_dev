@@ -14,14 +14,13 @@ class ToastService {
       messageText: Text(
         message,
         style: const TextStyle(
-          color: Colors.white,
+          color: Colors.black,
         ),
       ),
-      backgroundColor:
-          Colors.black.withOpacity(0.8), // Adjust opacity as needed
+      backgroundColor: Colors.grey.withOpacity(0.8),
       mainButton: TextButton(
         onPressed: () => Get.back(),
-        child: const Text("Close", style: TextStyle(color: Colors.white)),
+        child: const Text("Close", style: TextStyle(color: Colors.black)),
       ),
       duration: duration,
       snackPosition: position,

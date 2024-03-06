@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storefront/auth/services/toast_service.dart';
+import 'package:storefront/auth/view/signin_screen.dart';
+import 'package:storefront/bottom_bar/view/home.dart';
 
 class AuthController extends GetxController {
   TextEditingController emailController = TextEditingController();
@@ -10,11 +12,15 @@ class AuthController extends GetxController {
 
   Future<void> signIn() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
-      );
-      clearControllers();
+      )
+          .then((value) {
+        Get.offAll(() => const Home());
+        clearControllers();
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         debugPrint('No user found for that email.');
@@ -33,11 +39,15 @@ class AuthController extends GetxController {
 
   Future<void> signUp() async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
-      );
-      clearControllers();
+      )
+          .then((value) {
+        Get.offAll(() => const Home());
+        clearControllers();
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         debugPrint('The password is too weak.');
@@ -55,7 +65,9 @@ class AuthController extends GetxController {
 
   Future<void> signOut() async {
     try {
-      await FirebaseAuth.instance.signOut();
+      await FirebaseAuth.instance
+          .signOut()
+          .then((value) => Get.offAll(() => const SigninScreen()));
     } catch (e) {
       debugPrint(e.toString());
     }

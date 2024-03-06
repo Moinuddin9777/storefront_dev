@@ -69,6 +69,7 @@ class SigninScreen extends StatelessWidget {
 
               //password
               TextField(
+                obscureText: true,
                 style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
                 controller: authController.passwordController,

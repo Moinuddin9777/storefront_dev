@@ -36,38 +36,6 @@ class SignupScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // name
-              TextField(
-                controller: authController.nameController,
-                style: const TextStyle(color: Colors.white),
-                cursorColor: Colors.white,
-                decoration: InputDecoration(
-                  prefixIcon:
-                      const Icon(Icons.person_2_outlined, color: Colors.white),
-                  hintText: 'Name ',
-                  hintStyle: const TextStyle(
-                    color: Color.fromARGB(200, 255, 255, 255),
-                  ),
-                  suffixIcon: IconButton(
-                    onPressed: () => authController.nameController.clear(),
-                    icon: const Icon(Icons.clear, color: Colors.white),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Color.fromARGB(200, 255, 255, 255),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-
               //email address
               TextField(
                 controller: authController.emailController,
@@ -102,6 +70,7 @@ class SignupScreen extends StatelessWidget {
 
               //password
               TextField(
+                obscureText: true,
                 controller: authController.passwordController,
                 style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white,

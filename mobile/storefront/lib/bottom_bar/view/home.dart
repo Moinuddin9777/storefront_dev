@@ -8,15 +8,15 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<NavigationController>(
-        init: NavigationController(),
+      body: GetBuilder<BottomBarController>(
+        init: BottomBarController(),
         builder: (controller) => IndexedStack(
           index: controller.currentIndex,
           children: controller.screens,
         ),
       ),
-      bottomNavigationBar: GetBuilder<NavigationController>(
-        init: NavigationController(),
+      bottomNavigationBar: GetBuilder<BottomBarController>(
+        init: BottomBarController(),
         builder: (controller) => Container(
           decoration: const BoxDecoration(
             color: Color.fromRGBO(253, 177, 216, 1.0),
@@ -50,4 +50,3 @@ class Home extends StatelessWidget {
     );
   }
 }
-
