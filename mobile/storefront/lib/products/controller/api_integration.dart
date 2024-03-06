@@ -9,9 +9,9 @@ class ProductController extends GetxController {
   List<Product> products = [];
   bool isLoading = true;
 
-  ProductController(String value) {
-    brand = value;
-  }
+  // ProductController(String value) {
+  //   brand = value;
+  // }
 
   @override
   void onInit() {
