@@ -32,6 +32,10 @@ class Home extends StatelessWidget {
                 label: 'Home',
               ),
               BottomNavigationBarItem(
+                icon: Icon(Icons.category, color: Colors.black),
+                label: 'products',
+              ),
+              BottomNavigationBarItem(
                 icon: Icon(Icons.person, color: Colors.black),
                 label: 'Profile',
               ),
