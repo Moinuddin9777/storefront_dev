@@ -10,7 +10,7 @@ class ProductsPage extends StatelessWidget {
     ProductController productController = Get.put(ProductController());
     return Scaffold(
         appBar: AppBar(actions: [
-          Expanded(child: SearchableDropdownButton()),
+          // Expanded(child: SearchableDropdownButton()),
           IconButton(
             onPressed: () {},
             icon: const Icon(
