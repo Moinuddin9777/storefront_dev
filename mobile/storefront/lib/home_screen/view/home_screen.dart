@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+<<<<<<< HEAD
 import 'package:storefront/products/view/products_page.dart';
+=======
+import 'package:storefront/home_screen/view/searchable_dropdown_button.dart';
+import 'package:storefront/products/view/products_page.dart';
+//import 'package:storefront/home/controller/dropdown_controller.dart';
+>>>>>>> 590a4ce5fcfabba883ed8ddf741e9ff58ad56630
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -88,11 +94,54 @@ class HomePage extends StatelessWidget {
             ),
           ),
 
+<<<<<<< HEAD
           // go to products
           ElevatedButton(
               onPressed: () {
               Get.to(() => ProductsPage());
             }, child: const Text('Go to Products page'),),
+=======
+          // Dropdown button
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: SearchableDropdownButton(),
+                  ),
+                ),
+                //search icon
+                Padding(
+                  padding: const EdgeInsets.all(6.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      //dropdownController.handleSearchIconClick();
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadiusDirectional.circular(25),
+                        border: Border.all(
+                          width: 1.0,
+                        ),
+                      ),
+                      child: IconButton(
+                        onPressed: () {
+                          Get.to(const ProductsPage());
+                        },
+                        icon: Icon(
+                          Icons.search,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+>>>>>>> 590a4ce5fcfabba883ed8ddf741e9ff58ad56630
         ],
       ),
     );
