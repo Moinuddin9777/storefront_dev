@@ -30,6 +30,7 @@ class ProductController extends GetxController {
         for (var item in decodedData) {
           if (await checkImageUrlStatus(item['image_link'])) {
             products.add(Product.fromJson(item));
+            update();
           }
         }
         debugPrint('get completed');
