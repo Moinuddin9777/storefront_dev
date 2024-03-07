@@ -18,4 +18,12 @@ class ApiServices {
       return [];
     }
   }
+  Future<bool> checkImageUrlStatus(String url) async {
+    try {
+      final response = await Dio().get(url);
+      return response.statusCode == 200;
+    } catch (e) {
+      return false;
+    }
+  }
 }

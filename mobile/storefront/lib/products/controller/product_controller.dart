@@ -23,8 +23,11 @@ class ProductController extends GetxController {
     try {
       final decodedData = await ApiServices().fetchProducts();
       for (var item in decodedData) {
-        products.add(Product.fromJson(item));
-        totalProducts.add(Product.fromJson(item));
+        if (await ApiServices().checkImageUrlStatus(item['image_link']) ==
+            true) {
+          products.add(Product.fromJson(item));
+          totalProducts.add(Product.fromJson(item));
+        }
       }
     } catch (e) {
       debugPrint('Error: $e');
