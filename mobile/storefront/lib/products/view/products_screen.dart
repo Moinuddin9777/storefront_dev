@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:storefront/product_screen/controller/product_controller.dart';
-import 'package:storefront/product_screen/controller/dropdown_controller.dart';
-import 'package:storefront/product_screen/view/searchable_dropdown_button.dart';
+import 'package:storefront/products/controller/product_controller.dart';
+import 'package:storefront/products/controller/dropdown_controller.dart';
+import 'package:storefront/products/view/searchable_dropdown_button.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage({super.key});
@@ -57,7 +57,7 @@ class ProductsPage extends StatelessWidget {
                       )
                       .toList(),
                   onChanged: (value) {
-                    Get.find<ProductController>().selecteItem(value!);
+                    Get.find<ProductController>().selecteItems(value!);
                   },
                 ),
               ),

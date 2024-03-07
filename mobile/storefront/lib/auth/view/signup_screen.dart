@@ -138,7 +138,7 @@ class SignupScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // signup row
+              // signin if already a user
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

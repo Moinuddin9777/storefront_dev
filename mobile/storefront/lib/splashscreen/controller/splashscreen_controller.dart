@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:storefront/auth/view/signin_screen.dart';
-import 'package:storefront/bottom_bar/view/bottom_bar.dart';
+import 'package:storefront/home/view/bottom_bar.dart';
 
 class SplashScreenController extends GetxController {
   @override
@@ -11,6 +11,7 @@ class SplashScreenController extends GetxController {
   }
 
   void changeScreen() {
+    //Routes screen to HOME if user found else to signin page
     Future.delayed(const Duration(seconds: 3), () {
       var user = FirebaseAuth.instance.currentUser;
       if (user != null) {

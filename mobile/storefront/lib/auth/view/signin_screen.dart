@@ -33,6 +33,7 @@ class SigninScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              //EMail for signing in
               TextField(
                 controller: authController.emailController,
                 style: TextStyle(
@@ -66,7 +67,7 @@ class SigninScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              //password
+              //password for signin in
               TextField(
                 obscureText: true,
                 style: TextStyle(
@@ -101,7 +102,7 @@ class SigninScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // login button
+              // signin button
               GetBuilder(
                 init: AuthController(),
                 builder: (controller) {
@@ -149,7 +150,7 @@ class SigninScreen extends StatelessWidget {
               //   ),
               // ),
 
-              // signup row
+              // signup button for new Users
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

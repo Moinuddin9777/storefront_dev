@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storefront/auth/controller/auth_controller.dart';
-import 'package:storefront/theme/controller/theme_controller.dart';
+import 'package:storefront/utils/theme/controller/theme_controller.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -17,6 +17,7 @@ class ProfileScreen extends StatelessWidget {
           color: Color.fromARGB(255, 0, 0, 0),
         ),
         actions: [
+          //change ThemeMode (dark/light)
           GetBuilder(
             init: ThemeController(),
             builder: (themeController) {
@@ -42,12 +43,15 @@ class ProfileScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
+          //profile img
           Center(
             child: SizedBox(
               width: 300,
               child: Image.asset("assets/profile_img.png"),
             ),
           ),
+
+          //user name
           Center(
             child: Text(
               FirebaseAuth.instance.currentUser!.email!.split("@")[0],
@@ -58,6 +62,8 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
+
+          //Signout button Routes to sign in page
           IconButton(
             onPressed: () {
               Get.find<AuthController>().signOut();

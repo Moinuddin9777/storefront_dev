@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storefront/auth/services/toast_service.dart';
 import 'package:storefront/auth/view/signin_screen.dart';
-import 'package:storefront/bottom_bar/view/bottom_bar.dart';
+import 'package:storefront/home/view/bottom_bar.dart';
 
 class AuthController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isLoading = false;
 
+  //sign in with email and password
   Future<void> signIn() async {
     isLoading = true;
     update();
@@ -33,6 +34,7 @@ class AuthController extends GetxController {
     update();
   }
 
+  //sign up with email and password
   Future<void> signUp() async {
     isLoading = true;
     update();
@@ -56,6 +58,7 @@ class AuthController extends GetxController {
     update();
   }
 
+  //signout from device
   Future<void> signOut() async {
     try {
       await FirebaseAuth.instance
@@ -66,6 +69,7 @@ class AuthController extends GetxController {
     }
   }
 
+  //clear text fields
   void clearControllers() {
     emailController.clear();
     passwordController.clear();

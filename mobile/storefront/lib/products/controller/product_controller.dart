@@ -1,16 +1,17 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:storefront/product_screen/models/categories.dart';
-import 'package:storefront/product_screen/models/product.dart';
+import 'package:storefront/products/models/categories.dart';
+import 'package:storefront/products/models/product.dart';
+import 'package:storefront/products/services/api_service.dart';
 
 class ProductController extends GetxController {
-  List<Product> totalProducts = [];
   List<Product> products = [];
   List<Product> brandProducts = [];
+  List<Product> totalProducts = [];
   bool isLoading = true;
   List<String> categories = Categories().categories;
+
   @override
   void onInit() {
     super.onInit();
@@ -19,23 +20,11 @@ class ProductController extends GetxController {
 
   void loadProducts() async {
     debugPrint("Loading products called");
-    String url = 'http://makeup-api.herokuapp.com/api/v1/products.json?brand=nyx';
     try {
-      final response = await Dio().get(url);
-      // await Future.delayed(const Duration(seconds: 4), () {
-      //   isLoading = false;
-      //   update();
-      // });
-      if (response.statusCode == 200) {
-        final decodedData = response.data as List<dynamic>;
-        for (var item in decodedData) {
-          if (await checkImageUrlStatus(item['image_link'])) {
-            products.add(Product.fromJson(item));
-            totalProducts.add(Product.fromJson(item));
-          }
-        }
-      } else {
-        debugPrint('Error: ${response.statusCode}');
+      final decodedData = await ApiServices().fetchProducts();
+      for (var item in decodedData) {
+        products.add(Product.fromJson(item));
+        totalProducts.add(Product.fromJson(item));
       }
     } catch (e) {
       debugPrint('Error: $e');
@@ -78,21 +67,12 @@ class ProductController extends GetxController {
     }
   }
 
-  Future<bool> checkImageUrlStatus(String url) async {
-    try {
-      final response = await Dio().head(url);
-      return response.statusCode == 200;
-    } catch (e) {
-      return false;
-    }
-  }
-
   void sortProductsByPrice() {
     products.sort((a, b) => b.price!.compareTo(a.price!));
     update();
   }
 
-  void selecteItem(String value) {
+  void selecteItems(String value) {
     loadProductsfromCategory(value);
   }
 }

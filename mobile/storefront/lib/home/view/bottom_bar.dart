@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:storefront/bottom_bar/controller/bottom_navigation_controller.dart';
-import 'package:storefront/product_screen/controller/dropdown_controller.dart';
-import 'package:storefront/theme/controller/theme_controller.dart';
+import 'package:storefront/home/controller/bottom_navigation_controller.dart';
+import 'package:storefront/products/controller/dropdown_controller.dart';
+import 'package:storefront/utils/theme/controller/theme_controller.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});

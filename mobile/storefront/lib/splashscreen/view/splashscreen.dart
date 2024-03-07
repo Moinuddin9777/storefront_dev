@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storefront/auth/controller/auth_controller.dart';
-import 'package:storefront/product_screen/controller/product_controller.dart';
+import 'package:storefront/products/controller/product_controller.dart';
 import 'package:storefront/splashscreen/controller/splashscreen_controller.dart';
 
 class SplashScreen extends StatelessWidget {

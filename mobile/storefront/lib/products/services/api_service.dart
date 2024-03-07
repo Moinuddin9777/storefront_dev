@@ -1,13 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:storefront/utils/consts/api_consts.dart';
 
-class ApiIntegration {
+class ApiServices {
    Future<List<dynamic>> fetchProducts() async {
-    String url = 'http://makeup-api.herokuapp.com/api/v1/products.json?brand=nyx';
+    String url = "$API_URL?brand=nyx";
     try {
       final response = await Dio().get(url);
       if (response.statusCode == 200) {
-        return response.data;
+        return response.data as List<dynamic>;
       } else {
         debugPrint('Error: ${response.statusCode}');
         return [];
@@ -15,15 +16,6 @@ class ApiIntegration {
     } catch (e) {
       debugPrint('Error: $e');
       return [];
-    }
-  }
-
-   Future<bool> checkImageUrlStatus(String url) async {
-    try {
-      final response = await Dio().head(url);
-      return response.statusCode == 200;
-    } catch (e) {
-      return false;
     }
   }
 }
