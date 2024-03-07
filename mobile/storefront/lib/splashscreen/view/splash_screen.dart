@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storefront/auth/controller/auth_controller.dart';
+import 'package:storefront/product_screen/controller/product_controller.dart';
 import 'package:storefront/splashscreen/controller/splashscreen_controller.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -9,6 +10,9 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(SplashScreenController());
     Get.put(AuthController());
+    Get.put(ProductController());
+
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(

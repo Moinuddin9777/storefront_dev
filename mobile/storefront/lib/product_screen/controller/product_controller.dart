@@ -22,17 +22,16 @@ class ProductController extends GetxController {
     String url = 'http://makeup-api.herokuapp.com/api/v1/products.json?brand=nyx';
     try {
       final response = await Dio().get(url);
-      await Future.delayed(const Duration(seconds: 4), () {
-        isLoading = false;
-        update();
-      });
+      // await Future.delayed(const Duration(seconds: 4), () {
+      //   isLoading = false;
+      //   update();
+      // });
       if (response.statusCode == 200) {
         final decodedData = response.data as List<dynamic>;
         for (var item in decodedData) {
           if (await checkImageUrlStatus(item['image_link'])) {
             products.add(Product.fromJson(item));
             totalProducts.add(Product.fromJson(item));
-            update();
           }
         }
       } else {
@@ -41,8 +40,8 @@ class ProductController extends GetxController {
     } catch (e) {
       debugPrint('Error: $e');
     }
-    // isLoading = false;
-    // update();
+    isLoading = false;
+    update();
     debugPrint("Loading products completed");
   }
 

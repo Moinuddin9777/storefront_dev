@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:storefront/firebase_options.dart';
 import 'package:storefront/splashscreen/view/splash_screen.dart';
+import 'package:storefront/theme/models/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,9 +18,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      theme: AppThemes.darkTheme,
+      themeMode: ThemeMode.light,
+      home: const SplashScreen(),
     );
   }
 }

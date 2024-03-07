@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(15, 15, 15, 1.0),
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(253, 177, 216, 1.0),
-        shape: RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.circular(25.0), // Add rounded corners to the app bar
-        ),
         leading: const Icon(
           Icons.home,
           color: Color.fromARGB(255, 0, 0, 0),
@@ -53,16 +47,17 @@ class HomePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(10),
             child: RichText(
-              text: const TextSpan(
-                style: TextStyle(fontSize: 35),
+              text: TextSpan(
+                style: const TextStyle(fontSize: 35),
                 children: [
                   TextSpan(
                     text: 'All your ',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  TextSpan(
+                  const TextSpan(
                     text: 'Favorite Brands',
                     style: TextStyle(
                       color: Color.fromRGBO(218, 136, 182, 1.0),
@@ -72,7 +67,8 @@ class HomePage extends StatelessWidget {
                   TextSpan(
                     text: ' here !!',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],

@@ -11,12 +11,9 @@ class SigninScreen extends StatelessWidget {
     var authController = Get.find<AuthController>();
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: const Color.fromRGBO(15, 15, 15, 1.0),
+      // backgroundColor: const Color.fromRGBO(15, 15, 15, 1.0),
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(253, 177, 216, 1.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(25.0),
-        ),
         leading: const Icon(
           Icons.login,
           color: Color.fromARGB(255, 0, 0, 0),
@@ -38,29 +35,31 @@ class SigninScreen extends StatelessWidget {
             children: [
               TextField(
                 controller: authController.emailController,
-                style: const TextStyle(color: Colors.white),
-                cursorColor: Colors.white,
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground),
+                cursorColor: Theme.of(context).colorScheme.onBackground,
                 decoration: InputDecoration(
-                  prefixIcon:
-                      const Icon(Icons.email_outlined, color: Colors.white),
+                  prefixIcon: Icon(Icons.email_outlined,
+                      color: Theme.of(context).colorScheme.onBackground),
                   hintText: 'email address',
-                  hintStyle: const TextStyle(
-                    color: Color.fromARGB(200, 255, 255, 255),
+                  hintStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground,
                   ),
                   suffixIcon: IconButton(
                     onPressed: () => authController.emailController.clear(),
-                    icon: const Icon(Icons.clear, color: Colors.white),
+                    icon: Icon(Icons.clear,
+                        color: Theme.of(context).colorScheme.onBackground),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.onBackground,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Color.fromARGB(200, 255, 255, 255),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.onBackground,
                     ),
                   ),
                 ),
@@ -70,29 +69,32 @@ class SigninScreen extends StatelessWidget {
               //password
               TextField(
                 obscureText: true,
-                style: const TextStyle(color: Colors.white),
-                cursorColor: Colors.white,
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground),
+                cursorColor: Theme.of(context).colorScheme.onBackground,
                 controller: authController.passwordController,
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.lock, color: Colors.white),
+                  prefixIcon: Icon(Icons.lock,
+                      color: Theme.of(context).colorScheme.onBackground),
                   hintText: 'Password',
-                  hintStyle: const TextStyle(
-                    color: Color.fromARGB(200, 255, 255, 255),
+                  hintStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground,
                   ),
                   suffixIcon: IconButton(
                     onPressed: () => authController.passwordController.clear(),
-                    icon: const Icon(Icons.clear, color: Colors.white),
+                    icon: Icon(Icons.clear,
+                        color: Theme.of(context).colorScheme.onBackground),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.onBackground,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Color.fromARGB(200, 255, 255, 255),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.onBackground,
                     ),
                   ),
                 ),
@@ -152,10 +154,10 @@ class SigninScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       'Don\'t have an account ?',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.onBackground,
                       ),
                     ),
                     TextButton(

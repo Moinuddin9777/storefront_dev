@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storefront/auth/controller/auth_controller.dart';
+import 'package:storefront/theme/controller/theme_controller.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -9,17 +10,27 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(253, 177, 216, 1.0),
-        shape: RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.circular(25.0),
-        ),
         leading: const Icon(
           Icons.person,
           color: Color.fromARGB(255, 0, 0, 0),
         ),
+        actions: [
+          GetBuilder(
+            init: ThemeController(),
+            builder: (themeController) {
+              return IconButton(
+                icon: themeController.index == 0
+                    ? const Icon(Icons.light_mode, color: Colors.black)
+                    : const Icon(Icons.dark_mode, color: Colors.black),
+                onPressed: () {
+                  themeController.changeTheme();
+                },
+              );
+            },
+          ),
+        ],
         centerTitle: true,
         title: const Text(
           "Profile",
@@ -40,8 +51,8 @@ class ProfileScreen extends StatelessWidget {
           Center(
             child: Text(
               FirebaseAuth.instance.currentUser!.email!.split("@")[0],
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onBackground,
                 fontSize: 20,
               ),
             ),
@@ -51,15 +62,15 @@ class ProfileScreen extends StatelessWidget {
             onPressed: () {
               Get.find<AuthController>().signOut();
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.logout,
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.onBackground,
             ),
           ),
-          const Text(
+          Text(
             "Sign out",
             style: TextStyle(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.onBackground,
               fontSize: 20,
             ),
           ),

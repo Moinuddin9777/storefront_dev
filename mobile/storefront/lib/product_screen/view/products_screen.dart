@@ -8,10 +8,8 @@ class ProductsPage extends StatelessWidget {
   const ProductsPage({super.key});
   @override
   Widget build(BuildContext context) {
-    var ctrl = Get.put(ProductController());
-    Get.put(DropdownController());
+    var ctrl = Get.find<ProductController>();
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(253, 177, 216, 1.0),
         actions: [
@@ -25,9 +23,11 @@ class ProductsPage extends StatelessWidget {
             },
             icon: const Icon(
               Icons.search,
+              color: Colors.black,
             ),
           ),
           PopupMenuButton(
+            icon: const Icon(Icons.menu, color: Colors.black),
             onSelected: (value) {
               if (value == 'sort') {
                 Get.find<ProductController>().sortProductsByPrice();
@@ -45,6 +45,7 @@ class ProductsPage extends StatelessWidget {
               PopupMenuItem(
                 value: 'filter',
                 child: DropdownButton<String>(
+                  underline: Container(),
                   icon: const Icon(Icons.filter_alt_outlined),
                   items: Get.find<ProductController>()
                       .categories
@@ -68,17 +69,17 @@ class ProductsPage extends StatelessWidget {
           init: Get.find<ProductController>(),
           builder: (productController) {
             return productController.isLoading
-                ? const Center(
+                ? Center(
                     child: CircularProgressIndicator(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.onBackground,
                     ),
                   )
                 : productController.products.isEmpty
-                    ? const Center(
+                    ? Center(
                         child: Text(
                           "No products",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.onBackground,
                           ),
                         ),
                       )
@@ -124,8 +125,12 @@ class ProductsPage extends StatelessWidget {
                                     ),
                                     Text(
                                       productController.products[index].name,
-                                      style: const TextStyle(
-                                          overflow: TextOverflow.ellipsis),
+                                      style: TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .background,
+                                      ),
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -133,14 +138,20 @@ class ProductsPage extends StatelessWidget {
                                       children: [
                                         Text(
                                           'Rating: ${productController.products[index].rating}',
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             fontSize: 11,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .background,
                                           ),
                                         ),
                                         Text(
                                           'Price \$${productController.products[index].price}',
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             fontSize: 11,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .background,
                                           ),
                                         ),
                                       ],
