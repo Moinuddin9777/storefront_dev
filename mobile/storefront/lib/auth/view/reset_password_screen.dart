@@ -56,17 +56,21 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       return;
                     }
                     try {
-                      FirebaseAuth.instance.sendPasswordResetEmail(
-                          email: _emailController.text.trim());
-                      const snackBar = SnackBar(
-                          content: Text('Reset email Sent!! Check your inbox'));
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      Get.back();
+                      FirebaseAuth.instance
+                          .sendPasswordResetEmail(
+                              email: _emailController.text.trim())
+                          .then((value) {
+                        Get.back();
+                        const snackBar = SnackBar(
+                          content: Text('Reset email Sent!! Check your inbox'),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      });
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'user-not-found') {
                         const snackBar = SnackBar(
-                            content:
-                                Text('The email address is not registered.'));
+                          content: Text('The email address is not registered.'),
+                        );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       } else {
                         print(e);
@@ -83,7 +87,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   ),
                   child: const Text(
                     'Submit',
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
