@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storefront/auth/controller/auth_controller.dart';
+import 'package:storefront/auth/controller/login_controller.dart';
+import 'package:storefront/auth/view/reset_password_screen.dart';
 import 'package:storefront/auth/view/signup_screen.dart';
 
 class SigninScreen extends StatelessWidget {
@@ -42,7 +44,7 @@ class SigninScreen extends StatelessWidget {
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.email_outlined,
                       color: Theme.of(context).colorScheme.onBackground),
-                  hintText: 'email address',
+                  hintText: 'Email address',
                   hintStyle: TextStyle(
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
@@ -68,37 +70,62 @@ class SigninScreen extends StatelessWidget {
               const SizedBox(height: 20),
 
               //password for signin in
-              TextField(
-                obscureText: true,
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.onBackground),
-                cursorColor: Theme.of(context).colorScheme.onBackground,
-                controller: authController.passwordController,
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.lock,
-                      color: Theme.of(context).colorScheme.onBackground),
-                  hintText: 'Password',
-                  hintStyle: TextStyle(
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-                  suffixIcon: IconButton(
-                    onPressed: () => authController.passwordController.clear(),
-                    icon: Icon(Icons.clear,
-                        color: Theme.of(context).colorScheme.onBackground),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                      color: Theme.of(context).colorScheme.onBackground,
+              GetBuilder<LoginController>(
+                  init: LoginController(),
+                  builder: (loginController) {
+                    return TextField(
+                      obscureText: loginController.obscureText,
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.onBackground),
+                      cursorColor: Theme.of(context).colorScheme.onBackground,
+                      controller: authController.passwordController,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock,
+                            color: Theme.of(context).colorScheme.onBackground),
+                        hintText: 'Password',
+                        hintStyle: TextStyle(
+                          color: Theme.of(context).colorScheme.onBackground,
+                        ),
+                        suffixIcon: IconButton(
+                          onPressed: () => loginController.toggleHideAndShow(),
+                          icon: Icon(
+                              loginController.obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color:
+                                  Theme.of(context).colorScheme.onBackground),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Theme.of(context).colorScheme.onBackground,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Theme.of(context).colorScheme.onBackground,
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  const Spacer(),
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => const ResetPasswordScreen());
+                    },
+                    child: const Text(
+                      'Forgot Password?',
+                      style: TextStyle(
+                        color: Colors.blue, // Set the text color to blue
+                      ),
                     ),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                      color: Theme.of(context).colorScheme.onBackground,
-                    ),
-                  ),
-                ),
+                ],
               ),
               const SizedBox(height: 20),
 
