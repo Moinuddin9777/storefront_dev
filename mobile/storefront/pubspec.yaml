@@ -37,10 +37,11 @@ dependencies:
   modal_progress_hud_nsn: ^0.5.1
   dio: ^5.4.1
   firebase_core: ^2.25.5
-  firebase_auth: ^4.17.6
+  firebase_auth: ^4.17.8
   get: ^4.6.6
   dropdown_button2: ^2.3.9
   provider: ^5.0.0
+  cloud_firestore: ^4.15.8
   
 
 dev_dependencies:

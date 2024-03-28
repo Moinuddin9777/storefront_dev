@@ -9,7 +9,7 @@ class ToastService {
       Duration duration = const Duration(seconds: 3),
       SnackPosition position = SnackPosition.BOTTOM}) {
     Get.snackbar(
-      "",
+      "ERROR:",
       "",
       messageText: Text(
         message,
