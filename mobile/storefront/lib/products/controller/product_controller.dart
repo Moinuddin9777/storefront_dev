@@ -20,7 +20,7 @@ class ProductController extends GetxController {
 
   void loadProducts(String brand) async {
     isLoading = true;
-    totalProducts.clear();
+    brandProducts.clear();
     products.clear();
     update();
 
