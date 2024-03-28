@@ -55,27 +55,22 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         _emailController.text == "") {
                       return;
                     }
-                    try {
-                      FirebaseAuth.instance
-                          .sendPasswordResetEmail(
-                              email: _emailController.text.trim())
-                          .then((value) {
-                        Get.back();
-                        const snackBar = SnackBar(
-                          content: Text('Reset email Sent!! Check your inbox'),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      });
-                    } on FirebaseAuthException catch (e) {
-                      if (e.code == 'user-not-found') {
-                        const snackBar = SnackBar(
-                          content: Text('The email address is not registered.'),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      } else {
-                        print(e);
-                      }
-                    }
+                    FirebaseAuth.instance
+                        .sendPasswordResetEmail(
+                            email: _emailController.text.trim())
+                        .then((value) {
+                      Get.back();
+                      const snackBar = SnackBar(
+                        content: Text('Reset email Sent!! Check your inbox'),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }).catchError((e) {
+                      var msg = e.message.toString();
+                      SnackBar snackBar = SnackBar(
+                        content: Text(msg),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    });
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
