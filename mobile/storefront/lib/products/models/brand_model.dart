@@ -1,6 +1,6 @@
 class BrandModel {
   final List<String> brands = [
-    'All',
+    // 'All',
     'colourpop',
     // 'boosh',
     // 'deciem',

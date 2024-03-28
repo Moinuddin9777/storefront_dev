@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:storefront/utils/consts/api_consts.dart';
 
 class ApiServices {
-   Future<List<dynamic>> fetchProducts() async {
-    String url = "$API_URL?brand=nyx";
+  Future<List<dynamic>> fetchProducts(String brand) async {
+    String url = "$API_URL?brand=$brand";
     try {
       final response = await Dio().get(url);
       if (response.statusCode == 200) {
@@ -18,6 +18,7 @@ class ApiServices {
       return [];
     }
   }
+
   Future<bool> checkImageUrlStatus(String url) async {
     try {
       final response = await Dio().get(url);

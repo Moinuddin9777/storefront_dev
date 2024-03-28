@@ -13,12 +13,15 @@ class ProductsPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(253, 177, 216, 1.0),
         actions: [
-          Expanded(child: SearchableDropdownButton()),
+          Expanded(
+            child: SearchableDropdownButton(),
+          ),
           IconButton(
             onPressed: () {
               var brand = Get.find<DropdownController>().selectedValue;
               if (brand != null) {
-                ctrl.loadProductsfromBrand(brand);
+                // ctrl.loadProductsfromBrand(brand);
+                ctrl.loadProducts(brand);
               }
             },
             icon: const Icon(
@@ -74,95 +77,113 @@ class ProductsPage extends StatelessWidget {
                       color: Theme.of(context).colorScheme.onBackground,
                     ),
                   )
-                : productController.products.isEmpty
-                    ? Center(
-                        child: Text(
-                          "No products",
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.onBackground,
-                          ),
-                        ),
-                      )
-                    : GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 10.0,
-                          mainAxisSpacing: 10.0,
-                        ),
-                        itemCount: productController.products.length,
-                        itemBuilder: (context, index) {
-                          return GridTile(
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: InkWell(
-                                onTap: () {},
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(children: [
-                                    Expanded(
-                                      child: ClipRRect(
-                                        child: Image.network(
-                                          productController
-                                              .products[index].imageLink,
-                                          errorBuilder:
-                                              ((context, error, stackTrace) {
-                                            return Image.asset(
-                                                'assets/noimage.png');
-                                          }),
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.40,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.19,
-                                          fit: BoxFit.fill,
-                                        ),
-                                      ),
+                : GetBuilder<DropdownController>(
+                    init: Get.find<DropdownController>(),
+                    builder: (dropDownController) {
+                      return dropDownController.selectedValue == null
+                          ? const Center(
+                              child: Text(
+                                  'Select a brand and click the search icon'),
+                            )
+                          : productController.products.isEmpty
+                              ? Center(
+                                  child: Text(
+                                    "No products",
+                                    style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground,
                                     ),
-                                    Text(
-                                      productController.products[index].name,
-                                      style: TextStyle(
-                                        overflow: TextOverflow.ellipsis,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .background,
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Text(
-                                          'Rating: ${productController.products[index].rating}',
-                                          style: TextStyle(
-                                            fontSize: 11,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .background,
+                                  ),
+                                )
+                              : GridView.builder(
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    crossAxisSpacing: 10.0,
+                                    mainAxisSpacing: 10.0,
+                                  ),
+                                  itemCount: productController.products.length,
+                                  itemBuilder: (context, index) {
+                                    return GridTile(
+                                      child: Card(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        child: InkWell(
+                                          onTap: () {},
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(children: [
+                                              Expanded(
+                                                child: ClipRRect(
+                                                  child: Image.network(
+                                                    productController
+                                                        .products[index]
+                                                        .imageLink,
+                                                    errorBuilder: ((context,
+                                                        error, stackTrace) {
+                                                      return Image.asset(
+                                                          'assets/noimage.png');
+                                                    }),
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.40,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.19,
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                ),
+                                              ),
+                                              Text(
+                                                productController
+                                                    .products[index].name,
+                                                style: TextStyle(
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .background,
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Text(
+                                                    'Rating: ${productController.products[index].rating}',
+                                                    style: TextStyle(
+                                                      fontSize: 11,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .background,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    'Price \$${productController.products[index].price}',
+                                                    style: TextStyle(
+                                                      fontSize: 11,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .background,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ]),
                                           ),
                                         ),
-                                        Text(
-                                          'Price \$${productController.products[index].price}',
-                                          style: TextStyle(
-                                            fontSize: 11,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .background,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ]),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      );
+                                      ),
+                                    );
+                                  },
+                                );
+                    });
           }),
     );
   }

@@ -9,24 +9,29 @@ class ProductController extends GetxController {
   List<Product> products = [];
   List<Product> brandProducts = [];
   List<Product> totalProducts = [];
-  bool isLoading = true;
+  bool isLoading = false;
   List<String> categories = Categories().categories;
 
   @override
   void onInit() {
+    // loadProducts('nyx');
     super.onInit();
-    loadProducts();
   }
 
-  void loadProducts() async {
+  void loadProducts(String brand) async {
+    isLoading = true;
+    totalProducts.clear();
+    products.clear();
+    update();
+
     debugPrint("Loading products called");
     try {
-      final decodedData = await ApiServices().fetchProducts();
+      final decodedData = await ApiServices().fetchProducts(brand);
       for (var item in decodedData) {
         if (await ApiServices().checkImageUrlStatus(item['image_link']) ==
             true) {
           products.add(Product.fromJson(item));
-          totalProducts.add(Product.fromJson(item));
+          brandProducts.add(Product.fromJson(item));
         }
       }
     } catch (e) {
@@ -37,22 +42,22 @@ class ProductController extends GetxController {
     debugPrint("Loading products completed");
   }
 
-  void loadProductsfromBrand(String brand) async {
-    if (brand == "All") {
-      products = totalProducts;
-    } else {
-      products =
-          totalProducts.where((element) => element.brand == brand).toList();
-      brandProducts = products;
-      update();
-    }
-  }
+  // void loadProductsfromBrand(String brand) async {
+  //   if (brand == "All") {
+  //     products = totalProducts;
+  //   } else {
+  //     products =
+  //         totalProducts.where((element) => element.brand == brand).toList();
+  //     brandProducts = products;
+  //     update();
+  //   }
+  // }
 
   void loadProductsfromCategory(String type) async {
     if (type != "None") {
       if (brandProducts.isEmpty) {
         products =
-            totalProducts.where((element) => element.category == type).toList();
+            brandProducts.where((element) => element.category == type).toList();
         update();
       } else {
         products =
