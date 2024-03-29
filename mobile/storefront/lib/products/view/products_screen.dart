@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storefront/products/controller/product_controller.dart';
-import 'package:storefront/products/controller/dropdown_controller.dart';
 import 'package:storefront/products/view/searchable_dropdown_button.dart';
 
 class ProductsPage extends StatelessWidget {
@@ -55,7 +54,6 @@ class ProductsPage extends StatelessWidget {
         ],
       ),
       body: GetBuilder(
-<<<<<<< HEAD
         init: Get.find<ProductController>(),
         builder: (productController) {
           return productController.isLoading
@@ -86,44 +84,6 @@ class ProductsPage extends StatelessWidget {
                         ),
                         itemCount: productController.products.length,
                         itemBuilder: (context, index) {
-=======
-          init: Get.find<ProductController>(),
-          builder: (productController) {
-            return productController.isLoading
-                ? Center(
-                    child: CircularProgressIndicator(
-                      color: Theme.of(context).colorScheme.onBackground,
-                    ),
-                  )
-                : GetBuilder<DropdownController>(
-                    init: Get.find<DropdownController>(),
-                    builder: (dropDownController) {
-                      return dropDownController.selectedValue == null
-                          ? const Center(
-                              child: Text(
-                                  'Select a brand from the dropdown above'),
-                            )
-                          : productController.products.isEmpty
-                              ? Center(
-                                  child: Text(
-                                    "No products",
-                                    style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground,
-                                    ),
-                                  ),
-                                )
-                              : GridView.builder(
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    crossAxisSpacing: 10.0,
-                                    mainAxisSpacing: 10.0,
-                                  ),
-                                  itemCount: productController.products.length,
-                                  itemBuilder: (context, index) {
->>>>>>> 8c1d4d7aa6864c693473e6c2799da7c9ef244800
                                     return GridTile(
                                       child: Card(
                                         shape: RoundedRectangleBorder(
