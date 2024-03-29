@@ -11,11 +11,28 @@ class ProductController extends GetxController {
   List<Product> totalProducts = [];
   bool isLoading = false;
   List<String> categories = Categories().categories;
+  int currentPage = 1;
+  int perPage = 10; // Adjust the number of products per page as needed
 
   @override
   void onInit() {
-    // loadProducts('nyx');
+    loadAllProducts(); // Load all products initially
     super.onInit();
+  }
+
+  void loadAllProducts() async {
+    isLoading = true;
+    update();
+
+    try {
+      final decodedData = await ApiServices().fetchAllProducts(currentPage, perPage);
+      totalProducts.addAll(decodedData.map((item) => Product.fromJson(item)));
+      products.addAll(totalProducts);
+    } catch (e) {
+      debugPrint('Error: $e');
+    }
+    isLoading = false;
+    update();
   }
 
   void loadProducts(String brand) async {
@@ -24,12 +41,10 @@ class ProductController extends GetxController {
     products.clear();
     update();
 
-    debugPrint("Loading products called");
     try {
       final decodedData = await ApiServices().fetchProducts(brand);
       for (var item in decodedData) {
-        if (await ApiServices().checkImageUrlStatus(item['image_link']) ==
-            true) {
+        if (await ApiServices().checkImageUrlStatus(item['image_link']) == true) {
           products.add(Product.fromJson(item));
           brandProducts.add(Product.fromJson(item));
         }
@@ -39,7 +54,23 @@ class ProductController extends GetxController {
     }
     isLoading = false;
     update();
-    debugPrint("Loading products completed");
+  }
+
+  void loadMoreProducts() async {
+    if (isLoading) return;
+    isLoading = true;
+    currentPage++;
+    update();
+
+    try {
+      final decodedData = await ApiServices().fetchAllProducts(currentPage, perPage);
+      totalProducts.addAll(decodedData.map((item) => Product.fromJson(item)));
+      products.addAll(decodedData.map((item) => Product.fromJson(item)));
+    } catch (e) {
+      debugPrint('Error: $e');
+    }
+    isLoading = false;
+    update();
   }
 
   // void loadProductsfromBrand(String brand) async {

@@ -69,42 +69,36 @@ class ProductsPage extends StatelessWidget {
         ],
       ),
       body: GetBuilder(
-          init: Get.find<ProductController>(),
-          builder: (productController) {
-            return productController.isLoading
-                ? Center(
-                    child: CircularProgressIndicator(
-                      color: Theme.of(context).colorScheme.onBackground,
-                    ),
-                  )
-                : GetBuilder<DropdownController>(
-                    init: Get.find<DropdownController>(),
-                    builder: (dropDownController) {
-                      return dropDownController.selectedValue == null
-                          ? const Center(
-                              child: Text(
-                                  'Select a brand and click the search icon'),
-                            )
-                          : productController.products.isEmpty
-                              ? Center(
-                                  child: Text(
-                                    "No products",
-                                    style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground,
-                                    ),
-                                  ),
-                                )
-                              : GridView.builder(
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    crossAxisSpacing: 10.0,
-                                    mainAxisSpacing: 10.0,
-                                  ),
-                                  itemCount: productController.products.length,
-                                  itemBuilder: (context, index) {
+        init: Get.find<ProductController>(),
+        builder: (productController) {
+          return productController.isLoading
+              ? Center(
+                  child: CircularProgressIndicator(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                )
+              : productController.products.isEmpty
+                  ? const Center(
+                      child: Text('No products'),
+                    )
+                  : NotificationListener<ScrollNotification>(
+                      onNotification: (ScrollNotification scrollInfo) {
+                        if (!productController.isLoading &&
+                            scrollInfo.metrics.pixels ==
+                                scrollInfo.metrics.maxScrollExtent) {
+                          productController.loadMoreProducts();
+                        }
+                        return true;
+                      },
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10.0,
+                          mainAxisSpacing: 10.0,
+                        ),
+                        itemCount: productController.products.length,
+                        itemBuilder: (context, index) {
                                     return GridTile(
                                       child: Card(
                                         shape: RoundedRectangleBorder(
@@ -182,8 +176,8 @@ class ProductsPage extends StatelessWidget {
                                       ),
                                     );
                                   },
-                                );
-                    });
+                                )
+                    );
           }),
     );
   }
