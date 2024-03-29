@@ -13,8 +13,6 @@ class AuthController extends GetxController {
   late TextEditingController usernameController;
   late TextEditingController phonenumberController;
   late TextEditingController resetPasswordController;
-  late String username;
-  late String phoneNumber;
   //visibilities of passwords
   bool obscureTextSigninPassword = true;
   bool obscureTextSignupPassword = true;
@@ -31,8 +29,6 @@ class AuthController extends GetxController {
     usernameController = TextEditingController();
     phonenumberController = TextEditingController();
     resetPasswordController = TextEditingController();
-    username = '';
-    phoneNumber = '';
   }
 
   //sign in with email and password
@@ -77,17 +73,7 @@ class AuthController extends GetxController {
           Get.offAll(() => const Home());
 
           //add user
-          FirebaseFirestore.instance.collection("users").add({
-            'email': emailController.text.trim(),
-            'username': usernameController.text.trim(),
-            'password': passwordController.text.trim(),
-            'phonenumber': phonenumberController.text.trim(),
-          });
-
-          // Set username and phone number in AuthController
-          setUsername(usernameController.text.trim());
-          setPhoneNumber(phonenumberController.text.trim());
-
+          storeUserData();
           clearControllers();
         });
       } else {
@@ -171,14 +157,18 @@ class AuthController extends GetxController {
   }
 
   // Setters for username and phone number
-  void setUsername(String name) {
-    username = name;
-    update();
-  }
 
-  void setPhoneNumber(String number) {
-    phoneNumber = number;
-    update();
+  void storeUserData() {
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .set({
+      'id': FirebaseAuth.instance.currentUser!.uid,
+      'email': emailController.text.trim(),
+      'username': usernameController.text.trim(),
+      'password': passwordController.text.trim(),
+      'phonenumber': phonenumberController.text.trim(),
+    });
   }
 } 
 // auth/controller/auth_controller.dart

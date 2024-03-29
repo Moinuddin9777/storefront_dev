@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storefront/auth/controller/auth_controller.dart';
 import 'package:storefront/profile/controller/imagepicker_controller.dart';
+import 'package:storefront/profile/controller/profile_controller.dart';
 import 'package:storefront/profile/view/edit_profile_screen.dart';
 import 'package:storefront/utils/theme/controller/theme_controller.dart';
 
@@ -51,100 +52,96 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Profile image
-            GetBuilder<ImagePickerController>(
-              builder: (controller) {
-                return Center(
-                  child: InkWell(
-                    onTap: () async {
-                      await controller.pickImage();
+      body: GetBuilder(
+          init: ProfileController(),
+          builder: (profileController) {
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // Profile image
+                  GetBuilder<ImagePickerController>(
+                    builder: (controller) {
+                      return Center(
+                        child: InkWell(
+                          onTap: () async {
+                            await controller.pickImage();
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(150),
+                                  child: SizedBox(
+                                    width: 300,
+                                    height: 300,
+                                    child: controller.image != null
+                                        ? Image.file(controller.image!,
+                                            fit: BoxFit.cover)
+                                        : Image.asset("assets/profile_img.png",
+                                            fit: BoxFit.cover),
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 0,
+                                  right: 0,
+                                  child: CircleAvatar(
+                                    backgroundColor:
+                                        Colors.black.withOpacity(0.7),
+                                    child: const Icon(
+                                      Icons.camera_alt,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Stack(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(150),
-                            child: SizedBox(
-                              width: 300,
-                              height: 300,
-                              child: controller.image != null
-                                  ? Image.file(controller.image!,
-                                      fit: BoxFit.cover)
-                                  : Image.asset("assets/profile_img.png",
-                                      fit: BoxFit.cover),
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: CircleAvatar(
-                              backgroundColor: Colors.black.withOpacity(0.7),
-                              child: const Icon(
-                                Icons.camera_alt,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                  ),
+                  Text(
+                    profileController.user == null
+                        ? ""
+                        : profileController.user!["username"],
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: 20,
                     ),
                   ),
-                );
-              },
-            ),
-
-            // Display username
-            GetBuilder<AuthController>(
-              builder: (authController) {
-                return Text(
-                  authController.username,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onBackground,
-                    fontSize: 20,
+                  Text(
+                    profileController.user == null
+                        ? ""
+                        : profileController.user!["phonenumber"],
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: 20,
+                    ),
                   ),
-                );
-              },
-            ),
 
-            // Display phone number
-            GetBuilder<AuthController>(
-              builder: (authController) {
-                return Text(
-                  authController.phoneNumber,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onBackground,
-                    fontSize: 20,
+                  // Sign out button routes to sign in page
+                  IconButton(
+                    onPressed: () {
+                      Get.find<AuthController>().signOut();
+                    },
+                    icon: Icon(
+                      Icons.logout,
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
                   ),
-                );
-              },
-            ),
-            const SizedBox(height: 20),
-
-            // Sign out button routes to sign in page
-            IconButton(
-              onPressed: () {
-                Get.find<AuthController>().signOut();
-              },
-              icon: Icon(
-                Icons.logout,
-                color: Theme.of(context).colorScheme.onBackground,
+                  Text(
+                    "Sign out",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
               ),
-            ),
-            Text(
-              "Sign out",
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onBackground,
-                fontSize: 20,
-              ),
-            ),
-          ],
-        ),
-      ),
+            );
+          }),
     );
   }
 }

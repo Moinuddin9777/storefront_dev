@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:storefront/auth/controller/auth_controller.dart';
 import 'package:storefront/auth/view/reset_password_screen.dart';
+import 'package:storefront/profile/controller/profile_controller.dart';
 
 class EditProfileScreen extends StatelessWidget {
-  final AuthController _authController = Get.find<AuthController>();
+  final profileController = Get.find<ProfileController>();
 
   EditProfileScreen({Key? key}) : super(key: key);
 
@@ -20,14 +20,14 @@ class EditProfileScreen extends StatelessWidget {
           children: [
             // Text field for editing username
             TextFormField(
-              controller: _authController.usernameController,
+              controller: profileController.usernameController,
               decoration: const InputDecoration(
                 labelText: 'Username',
               ),
             ),
             // Text field for editing phone number
             TextFormField(
-              controller: _authController.phonenumberController,
+              controller: profileController.phoneController,
               decoration: const InputDecoration(
                 labelText: 'Phone Number',
               ),
@@ -43,10 +43,7 @@ class EditProfileScreen extends StatelessWidget {
             // Elevated button for submitting changes
             ElevatedButton(
               onPressed: () {
-                _authController.setUsername(
-                    _authController.usernameController.text.trim());
-                _authController.setPhoneNumber(
-                    _authController.phonenumberController.text.trim());
+                profileController.updateProfile();
                 Get.back();
               },
               child: const Text('Submit'),
