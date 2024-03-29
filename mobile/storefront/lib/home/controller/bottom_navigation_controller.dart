@@ -10,7 +10,7 @@ class BottomBarController extends GetxController {
   final screens = [
     const HomePage(),
     const ProductsPage(),
-    const ProfileScreen(),
+    ProfileScreen(),
   ];
 
   void changeIndex(int index) {
