@@ -2,6 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storefront/products/controller/dropdown_controller.dart';
+import 'package:storefront/products/controller/product_controller.dart';
 import 'package:storefront/products/models/brand_model.dart';
 
 class SearchableDropdownButton extends StatelessWidget {
@@ -38,6 +39,12 @@ class SearchableDropdownButton extends StatelessWidget {
             value: controller.selectedValue,
             onChanged: (value) {
               controller.setSelectedValue(value!);
+              var brand = Get.find<DropdownController>().selectedValue;
+              var ctrl = Get.find<ProductController>();
+              if (brand != null) {
+                // ctrl.loadProductsfromBrand(brand);
+                ctrl.loadProducts(brand);
+              }
             },
             selectedItemBuilder: (BuildContext context) {
               return brandModel.brands.map<Widget>((String item) {

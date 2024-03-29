@@ -16,19 +16,19 @@ class ProductsPage extends StatelessWidget {
           Expanded(
             child: SearchableDropdownButton(),
           ),
-          IconButton(
-            onPressed: () {
-              var brand = Get.find<DropdownController>().selectedValue;
-              if (brand != null) {
-                // ctrl.loadProductsfromBrand(brand);
-                ctrl.loadProducts(brand);
-              }
-            },
-            icon: const Icon(
-              Icons.search,
-              color: Colors.black,
-            ),
-          ),
+          // IconButton(
+          //   onPressed: () {
+          //     var brand = Get.find<DropdownController>().selectedValue;
+          //     if (brand != null) {
+          //       // ctrl.loadProductsfromBrand(brand);
+          //       ctrl.loadProducts(brand);
+          //     }
+          //   },
+          //   icon: const Icon(
+          //     Icons.search,
+          //     color: Colors.black,
+          //   ),
+          // ),
           PopupMenuButton(
             icon: const Icon(Icons.menu, color: Colors.black),
             onSelected: (value) {
@@ -83,7 +83,7 @@ class ProductsPage extends StatelessWidget {
                       return dropDownController.selectedValue == null
                           ? const Center(
                               child: Text(
-                                  'Select a brand and click the search icon'),
+                                  'Select a brand from the dropdown above'),
                             )
                           : productController.products.isEmpty
                               ? Center(

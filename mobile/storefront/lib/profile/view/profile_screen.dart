@@ -39,7 +39,7 @@ class ProfileScreen extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.edit, color: Colors.black),
             onPressed: () {
-              Get.to(EditProfileScreen());
+              Get.to(() => EditProfileScreen());
             },
           ),
         ],
@@ -56,6 +56,7 @@ class ProfileScreen extends StatelessWidget {
           init: ProfileController(),
           builder: (profileController) {
             return SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -69,58 +70,96 @@ class ProfileScreen extends StatelessWidget {
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Stack(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(150),
-                                  child: SizedBox(
-                                    width: 300,
-                                    height: 300,
-                                    child: controller.image != null
-                                        ? Image.file(controller.image!,
-                                            fit: BoxFit.cover)
-                                        : Image.asset("assets/profile_img.png",
-                                            fit: BoxFit.cover),
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 0,
-                                  right: 0,
-                                  child: CircleAvatar(
-                                    backgroundColor:
-                                        Colors.black.withOpacity(0.7),
-                                    child: const Icon(
-                                      Icons.camera_alt,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(150),
+                              child: SizedBox(
+                                width: 300,
+                                height: 300,
+                                child: controller.image != null
+                                    ? Image.file(controller.image!,
+                                        fit: BoxFit.cover)
+                                    : Image.asset("assets/profile_img.png",
+                                        fit: BoxFit.cover),
+                              ),
                             ),
                           ),
                         ),
                       );
                     },
                   ),
-                  Text(
-                    profileController.user == null
-                        ? ""
-                        : profileController.user!["username"],
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onBackground,
-                      fontSize: 20,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        "Email:",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onBackground,
+                          fontSize: 20,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        profileController.user == null
+                            ? "Email id not set"
+                            : profileController.user!["email"],
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onBackground,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    profileController.user == null
-                        ? ""
-                        : profileController.user!["phonenumber"],
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onBackground,
-                      fontSize: 20,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        "Username:",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onBackground,
+                          fontSize: 20,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        profileController.user == null
+                            ? "Please Set a Username"
+                            : profileController.user!["username"],
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onBackground,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "Phone Number:",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onBackground,
+                          fontSize: 20,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        profileController.user == null
+                            ? "Phone Number not set"
+                            : profileController.user!["phonenumber"],
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onBackground,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
                   ),
 
+                  const SizedBox(
+                    height: 20,
+                  ),
                   // Sign out button routes to sign in page
                   IconButton(
                     onPressed: () {

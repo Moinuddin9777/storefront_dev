@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storefront/auth/view/reset_password_screen.dart';
+import 'package:storefront/profile/controller/imagepicker_controller.dart';
 import 'package:storefront/profile/controller/profile_controller.dart';
 
 class EditProfileScreen extends StatelessWidget {
@@ -11,6 +12,7 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Edit Profile'),
       ),
@@ -18,6 +20,49 @@ class EditProfileScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            GetBuilder<ImagePickerController>(
+              builder: (controller) {
+                return SingleChildScrollView(
+                  child: Center(
+                    child: InkWell(
+                      onTap: () async {
+                        await controller.pickImage();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(150),
+                              child: SizedBox(
+                                width: 300,
+                                height: 300,
+                                child: controller.image != null
+                                    ? Image.file(controller.image!,
+                                        fit: BoxFit.cover)
+                                    : Image.asset("assets/profile_img.png",
+                                        fit: BoxFit.cover),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: CircleAvatar(
+                                backgroundColor: Colors.black.withOpacity(0.7),
+                                child: const Icon(
+                                  Icons.camera_alt,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
             // Text field for editing username
             TextFormField(
               controller: profileController.usernameController,
@@ -44,6 +89,7 @@ class EditProfileScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 profileController.updateProfile();
+                profileController.clearControllers();
                 Get.back();
               },
               child: const Text('Submit'),
