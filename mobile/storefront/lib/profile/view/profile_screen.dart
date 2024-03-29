@@ -64,24 +64,15 @@ class ProfileScreen extends StatelessWidget {
                 GetBuilder<ImagePickerController>(
                   builder: (controller) {
                     return Center(
-                      child: InkWell(
-                        onTap: () async {
-                          await controller.pickImage();
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(150),
-                            child: SizedBox(
-                              width: 300,
-                              height: 300,
-                              child: controller.image != null
-                                  ? Image.file(controller.image!,
-                                      fit: BoxFit.cover)
-                                  : Image.asset("assets/profile_img.png",
-                                      fit: BoxFit.cover),
-                            ),
-                          ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: SizedBox(
+                          width: 200,
+                          height: 200,
+                          child: controller.image != null
+                              ? Image.file(controller.image!, fit: BoxFit.cover)
+                              : Image.asset("assets/profile_img.png",
+                                  fit: BoxFit.cover),
                         ),
                       ),
                     );
