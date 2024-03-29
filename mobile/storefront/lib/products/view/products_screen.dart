@@ -8,26 +8,12 @@ class ProductsPage extends StatelessWidget {
   const ProductsPage({super.key});
   @override
   Widget build(BuildContext context) {
-    var ctrl = Get.find<ProductController>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(253, 177, 216, 1.0),
         actions: [
           Expanded(
             child: SearchableDropdownButton(),
-          ),
-          IconButton(
-            onPressed: () {
-              var brand = Get.find<DropdownController>().selectedValue;
-              if (brand != null) {
-                // ctrl.loadProductsfromBrand(brand);
-                ctrl.loadProducts(brand);
-              }
-            },
-            icon: const Icon(
-              Icons.search,
-              color: Colors.black,
-            ),
           ),
           PopupMenuButton(
             icon: const Icon(Icons.menu, color: Colors.black),
@@ -69,6 +55,7 @@ class ProductsPage extends StatelessWidget {
         ],
       ),
       body: GetBuilder(
+<<<<<<< HEAD
         init: Get.find<ProductController>(),
         builder: (productController) {
           return productController.isLoading
@@ -99,6 +86,44 @@ class ProductsPage extends StatelessWidget {
                         ),
                         itemCount: productController.products.length,
                         itemBuilder: (context, index) {
+=======
+          init: Get.find<ProductController>(),
+          builder: (productController) {
+            return productController.isLoading
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+                  )
+                : GetBuilder<DropdownController>(
+                    init: Get.find<DropdownController>(),
+                    builder: (dropDownController) {
+                      return dropDownController.selectedValue == null
+                          ? const Center(
+                              child: Text(
+                                  'Select a brand from the dropdown above'),
+                            )
+                          : productController.products.isEmpty
+                              ? Center(
+                                  child: Text(
+                                    "No products",
+                                    style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground,
+                                    ),
+                                  ),
+                                )
+                              : GridView.builder(
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    crossAxisSpacing: 10.0,
+                                    mainAxisSpacing: 10.0,
+                                  ),
+                                  itemCount: productController.products.length,
+                                  itemBuilder: (context, index) {
+>>>>>>> 8c1d4d7aa6864c693473e6c2799da7c9ef244800
                                     return GridTile(
                                       child: Card(
                                         shape: RoundedRectangleBorder(

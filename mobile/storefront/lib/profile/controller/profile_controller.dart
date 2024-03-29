@@ -8,11 +8,24 @@ class ProfileController extends GetxController {
   TextEditingController phoneController = TextEditingController();
 
   QueryDocumentSnapshot<dynamic>? user;
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    phoneController.dispose();
+    super.dispose();
+  }
+
   @override
   onInit() async {
     super.onInit();
     user = await getUser();
     update();
+  }
+
+  void clearControllers() {
+    usernameController.clear();
+    phoneController.clear();
   }
 
   Future<QueryDocumentSnapshot<dynamic>> getUser() async {
