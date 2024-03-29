@@ -8,7 +8,6 @@ class ProductsPage extends StatelessWidget {
   const ProductsPage({super.key});
   @override
   Widget build(BuildContext context) {
-    var ctrl = Get.find<ProductController>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(253, 177, 216, 1.0),
@@ -16,19 +15,6 @@ class ProductsPage extends StatelessWidget {
           Expanded(
             child: SearchableDropdownButton(),
           ),
-          // IconButton(
-          //   onPressed: () {
-          //     var brand = Get.find<DropdownController>().selectedValue;
-          //     if (brand != null) {
-          //       // ctrl.loadProductsfromBrand(brand);
-          //       ctrl.loadProducts(brand);
-          //     }
-          //   },
-          //   icon: const Icon(
-          //     Icons.search,
-          //     color: Colors.black,
-          //   ),
-          // ),
           PopupMenuButton(
             icon: const Icon(Icons.menu, color: Colors.black),
             onSelected: (value) {
